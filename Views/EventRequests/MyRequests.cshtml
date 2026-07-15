@@ -1,0 +1,304 @@
+@model List<EventRescue.Models.EventRequest>
+@using EventRescue.Models.Enums
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<EventRescue.SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["MyRequests"];
+
+    int totalRequests = Model?.Count ?? 0;
+    int pendingRequests = Model?.Count(r => r.Status == EventStatus.Pending) ?? 0;
+    int acceptedRequests = Model?.Count(r => r.Status == EventStatus.Accepted) ?? 0;
+    int completedRequests = Model?.Count(r => r.Status == EventStatus.Completed) ?? 0;
+    int canceledRequests = Model?.Count(r => r.Status == EventStatus.Canceled) ?? 0;
+
+    var isEnglish = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("en");
+
+    var categoryTranslations = new Dictionary<string, string>
+    {
+        { "قهوجي أو قهوجية", "Coffee Server" },
+        { "مقدمات ضيافة", "Hospitality Hostesses" },
+        { "عاملة تنظيف", "Cleaning Worker" },
+        { "فني إصلاح أثاث", "Furniture Repair Technician" },
+        { "منسق ورد", "Flower Coordinator" },
+        { "مصور مناسبات", "Event Photographer" },
+        { "شيف منزلي", "Home Chef" },
+        { "سائق توصيل", "Delivery Driver" },
+        { "كراسي وطاولات", "Tables and Chairs" },
+        { "كنب", "Sofas" },
+        { "خيام", "Tents" },
+        { "سخانات ومبردات", "Heaters and Coolers" }
+    };
+
+    var regionTranslations = new Dictionary<string, string>
+    {
+        { "الرياض", "Riyadh" },
+        { "جدة", "Jeddah" },
+        { "الدمام", "Dammam" },
+        { "مكة", "Makkah" },
+        { "المدينة المنورة", "Madinah" }
+    };
+}
+
+<style>
+    .er-page {
+        direction: rtl;
+    }
+
+    html[dir="ltr"] .er-page {
+        direction: ltr;
+    }
+</style>
+
+<div class="container er-page mt-4 mb-5">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show rounded-4">
+            <i class="bi bi-check-circle-fill"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show rounded-4">
+            <i class="bi bi-exclamation-triangle-fill"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <section class="er-hero mb-4">
+        <div class="er-hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="er-badge">
+                        <i class="bi bi-list-check"></i>
+                        @Localizer["MyRequestsTracking"]
+                    </div>
+
+                    <h1 class="er-title">
+                        @Localizer["MyRequests"]
+                    </h1>
+
+                    <p class="er-subtitle mb-0">
+                        @Localizer["MyRequestsHeroText"]
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-start text-center mt-4 mt-lg-0">
+                    <a asp-action="Create" class="btn btn-primary er-btn">
+                        <i class="bi bi-plus-circle"></i>
+                        @Localizer["MyRequestsCreateNew"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md">
+            <div class="er-stat text-center">
+                <span class="er-soft-icon mb-2">
+                    <i class="bi bi-folder2-open"></i>
+                </span>
+                <div class="er-stat-number">@totalRequests</div>
+                <div class="er-muted small fw-bold">@Localizer["MyRequestsTotal"]</div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md">
+            <div class="er-stat text-center">
+                <span class="er-soft-icon mb-2" style="background: #fff7ed; color: #c2410c;">
+                    <i class="bi bi-hourglass-split"></i>
+                </span>
+                <div class="er-stat-number">@pendingRequests</div>
+                <div class="er-muted small fw-bold">@Localizer["MyRequestsPending"]</div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md">
+            <div class="er-stat text-center">
+                <span class="er-soft-icon mb-2" style="background: #e0f2fe; color: #0369a1;">
+                    <i class="bi bi-check2-circle"></i>
+                </span>
+                <div class="er-stat-number">@acceptedRequests</div>
+                <div class="er-muted small fw-bold">@Localizer["MyRequestsAccepted"]</div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md">
+            <div class="er-stat text-center">
+                <span class="er-soft-icon mb-2" style="background: #dcfce7; color: #166534;">
+                    <i class="bi bi-patch-check"></i>
+                </span>
+                <div class="er-stat-number">@completedRequests</div>
+                <div class="er-muted small fw-bold">@Localizer["MyRequestsCompleted"]</div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md">
+            <div class="er-stat text-center">
+                <span class="er-soft-icon mb-2" style="background: #fee2e2; color: #991b1b;">
+                    <i class="bi bi-x-circle"></i>
+                </span>
+                <div class="er-stat-number">@canceledRequests</div>
+                <div class="er-muted small fw-bold">@Localizer["MyRequestsCanceled"]</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="er-card er-card-body py-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h5 class="fw-bold mb-1">@Localizer["MyRequestsListTitle"]</h5>
+                <p class="er-muted mb-0 small">@Localizer["MyRequestsListText"]</p>
+            </div>
+
+            <a asp-controller="Account" asp-action="Profile" class="btn btn-outline-primary er-btn">
+                <i class="bi bi-arrow-right"></i>
+                @Localizer["BackToUserDashboard"]
+            </a>
+        </div>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="er-card er-card-body text-center py-5">
+            <span class="er-soft-icon mb-3" style="width: 80px; height: 80px; font-size: 2.4rem;">
+                <i class="bi bi-inbox"></i>
+            </span>
+
+            <h4 class="fw-bold">@Localizer["NoRequestsYet"]</h4>
+
+            <p class="er-muted mb-4">
+                @Localizer["NoRequestsYetText"]
+            </p>
+
+            <a asp-action="Create" class="btn btn-primary er-btn px-4">
+                <i class="bi bi-plus-circle"></i>
+                @Localizer["MyRequestsCreateNew"]
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var request in Model)
+            {
+                string statusText = request.Status switch
+                {
+                    EventStatus.Pending => Localizer["MyRequestsStatusPending"].Value,
+                    EventStatus.Accepted => Localizer["MyRequestsStatusAccepted"].Value,
+                    EventStatus.Completed => Localizer["MyRequestsStatusCompleted"].Value,
+                    EventStatus.Canceled => Localizer["MyRequestsStatusCanceled"].Value,
+                    _ => Localizer["MyRequestsStatusUnknown"].Value
+                };
+
+                string statusClass = request.Status switch
+                {
+                    EventStatus.Pending => "er-status-pending",
+                    EventStatus.Accepted => "er-status-accepted",
+                    EventStatus.Completed => "er-status-completed",
+                    EventStatus.Canceled => "er-status-canceled",
+                    _ => "er-status-pending"
+                };
+
+                string statusIcon = request.Status switch
+                {
+                    EventStatus.Pending => "bi-hourglass-split",
+                    EventStatus.Accepted => "bi-check2-circle",
+                    EventStatus.Completed => "bi-patch-check",
+                    EventStatus.Canceled => "bi-x-circle",
+                    _ => "bi-info-circle"
+                };
+
+                string categoryName = request.Category?.Name?.Trim() ?? Localizer["MyRequestsNotSpecified"].Value;
+
+                if (isEnglish && request.Category != null && categoryTranslations.ContainsKey(categoryName))
+                {
+                    categoryName = categoryTranslations[categoryName];
+                }
+
+                string regionName = request.Region?.Name?.Trim() ?? Localizer["MyRequestsNotSpecifiedFemale"].Value;
+
+                if (isEnglish && request.Region != null && regionTranslations.ContainsKey(regionName))
+                {
+                    regionName = regionTranslations[regionName];
+                }
+
+                <div class="col-xl-4 col-md-6">
+                    <div class="er-card h-100 overflow-hidden">
+
+                        @if (!string.IsNullOrEmpty(request.ImagePath))
+                        {
+                            <img src="@request.ImagePath"
+                                 alt="@Localizer["MyRequestsImageAlt"]"
+                                 style="width: 100%; height: 200px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center justify-content-center"
+                                 style="height: 200px; background: var(--er-soft-blue); color: var(--er-blue); font-size: 3rem;">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        }
+
+                        <div class="er-card-body">
+
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">@request.Title</h5>
+
+                                <span class="er-status @statusClass">
+                                    <i class="bi @statusIcon"></i>
+                                    @statusText
+                                </span>
+                            </div>
+
+                            <p class="er-muted" style="min-height: 50px;">@request.Description</p>
+
+                            <div class="d-grid gap-2 mb-3">
+                                <div class="er-action py-2">
+                                    <span class="small">
+                                        <i class="bi bi-tools text-primary"></i>
+                                        <strong>@Localizer["MyRequestsServiceLabel"]</strong> @categoryName
+                                    </span>
+                                </div>
+
+                                <div class="er-action py-2">
+                                    <span class="small">
+                                        <i class="bi bi-calendar-event text-primary"></i>
+                                        <strong>@Localizer["MyRequestsAppointmentLabel"]</strong> @request.EventDate.ToString("yyyy/MM/dd — hh:mm tt")
+                                    </span>
+                                </div>
+
+                                <div class="er-action py-2">
+                                    <span class="small">
+                                        <i class="bi bi-geo-alt text-primary"></i>
+                                        <strong>@Localizer["MyRequestsCityLabel"]</strong> @regionName — @request.Address
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="border-top pt-3">
+                                <div class="er-muted small mb-3">
+                                    <i class="bi bi-clock text-primary"></i>
+                                    @Localizer["MyRequestsSentDateLabel"] @request.CreatedAt.ToString("yyyy/MM/dd")
+                                </div>
+
+                                <a asp-action="Details"
+                                   asp-route-id="@request.Id"
+                                   class="btn btn-outline-primary er-btn w-100">
+                                    <i class="bi bi-eye"></i>
+                                    @Localizer["MyRequestsViewDetails"]
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

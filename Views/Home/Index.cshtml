@@ -1,0 +1,842 @@
+﻿@using EventRescue.Models
+@using System.Linq
+
+@{
+    var categories = ViewBag.Categories as List<Category> ?? new List<Category>();
+    var isEnglish = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("en");
+
+    Func<string, string, string> T = (ar, en) => isEnglish ? en : ar;
+
+    ViewData["Title"] = T("الرئيسية", "Home");
+
+    var categoryTranslations = new Dictionary<string, string>
+    {
+        { "قهوجي أو قهوجية", "Coffee Server" },
+        { "مقدمات ضيافة", "Hospitality" },
+        { "عاملة تنظيف", "Cleaning" },
+        { "فني إصلاح أثاث", "Furniture Repair" },
+        { "منسق ورد", "Flowers" },
+        { "مصور مناسبات", "Photographer" },
+        { "شيف منزلي", "Home Chef" },
+        { "سائق توصيل", "Delivery" },
+        { "كراسي وطاولات", "Tables & Chairs" },
+        { "كنب", "Sofas" },
+        { "خيام", "Tents" },
+        { "سخانات ومبردات", "Heaters & Coolers" }
+    };
+
+    var repairNames = new[]
+    {
+        "فني إصلاح أثاث",
+        "كنب"
+    };
+
+    var setupNames = new[]
+    {
+        "كراسي وطاولات",
+        "خيام",
+        "سخانات ومبردات",
+        "منسق ورد"
+    };
+
+    var supportNames = new[]
+    {
+        "قهوجي أو قهوجية",
+        "مقدمات ضيافة",
+        "عاملة تنظيف",
+        "مصور مناسبات",
+        "شيف منزلي",
+        "سائق توصيل"
+    };
+
+    var repairCategories = categories
+        .Where(c => repairNames.Contains(c.Name.Trim()))
+        .ToList();
+
+    var setupCategories = categories
+        .Where(c => setupNames.Contains(c.Name.Trim()))
+        .ToList();
+
+    var supportCategories = categories
+        .Where(c => supportNames.Contains(c.Name.Trim()))
+        .ToList();
+
+    var cardController = User.Identity != null && User.Identity.IsAuthenticated
+        ? "EventRequests"
+        : "Account";
+
+    var cardAction = User.Identity != null && User.Identity.IsAuthenticated
+        ? "Create"
+        : "Register";
+}
+
+<style>
+    body {
+        background: #f3f6fb;
+    }
+
+    .home-page {
+        direction: rtl;
+        color: #111827;
+    }
+
+    html[dir="ltr"] .home-page {
+        direction: ltr;
+    }
+
+    .hero-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 34px;
+        background:
+            radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), transparent 35%),
+            radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.25), transparent 35%),
+            linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #0f172a 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 60px 45px;
+        color: white;
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25);
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 17px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #bfdbfe;
+        font-weight: 700;
+        backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+        font-size: 3.1rem;
+        line-height: 1.45;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: #ffffff;
+    }
+
+    .hero-title .highlight {
+        color: #60a5fa;
+    }
+
+    .hero-text {
+        font-size: 1.12rem;
+        line-height: 2;
+        color: #cbd5e1;
+        max-width: 680px;
+    }
+
+    .hero-actions .btn {
+        border-radius: 999px;
+        padding: 13px 28px;
+        font-weight: 800;
+    }
+
+    .hero-actions .btn-light {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    }
+
+    .hero-actions .btn-light:hover {
+        background: white;
+        color: #0f172a;
+    }
+
+    .action-panel {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.20);
+        border-radius: 30px;
+        padding: 28px;
+        box-shadow: 0 28px 65px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(16px);
+    }
+
+    .action-panel-inner {
+        background: rgba(255, 255, 255, 0.97);
+        color: #111827;
+        border-radius: 26px;
+        padding: 24px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    .panel-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #2563eb, #38bdf8);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+    }
+
+    .start-badge {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-radius: 999px;
+        padding: 7px 14px;
+        font-size: 0.85rem;
+        font-weight: 800;
+    }
+
+    .guide-item {
+        display: flex;
+        gap: 12px;
+        padding: 14px 0;
+        border-bottom: 1px solid #eef2f7;
+    }
+
+    .guide-item:last-child {
+        border-bottom: 0;
+    }
+
+    .guide-number {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: #eff6ff;
+        color: #2563eb;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        flex-shrink: 0;
+    }
+
+    .service-mini {
+        background: #f8fafc;
+        border: 1px solid #e5eaf3;
+        color: #334155;
+        border-radius: 999px;
+        padding: 8px 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: 4px;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .service-mini i {
+        color: #2563eb;
+    }
+
+    .section-title {
+        font-weight: 900;
+        letter-spacing: -0.6px;
+        color: #111827;
+    }
+
+    .solution-card {
+        height: 100%;
+        background: #ffffff;
+        border: 1px solid #e5eaf3;
+        border-radius: 30px;
+        padding: 30px;
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+        transition: 0.24s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .solution-card:hover {
+        transform: translateY(-7px);
+        border-color: #bfdbfe;
+        box-shadow: 0 28px 60px rgba(37, 99, 235, 0.14);
+    }
+
+    .solution-card::after {
+        content: "";
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(37, 99, 235, 0.07);
+        left: -60px;
+        bottom: -70px;
+    }
+
+    .featured-solution {
+        background:
+            radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 35%),
+            #ffffff;
+        border-color: #bfdbfe;
+    }
+
+    .solution-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 26px;
+        background:
+            radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 35%),
+            linear-gradient(135deg, #2563eb, #0f172a);
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 18px 35px rgba(37, 99, 235, 0.28);
+    }
+
+    .solution-icon::after {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        border-radius: 30px;
+        border: 1px solid rgba(37, 99, 235, 0.18);
+    }
+
+    .solution-icon i {
+        position: relative;
+        z-index: 2;
+    }
+
+    .repair-solution .solution-icon {
+        background:
+            radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 35%),
+            linear-gradient(135deg, #2563eb, #0f172a);
+    }
+
+    .setup-solution .solution-icon {
+        background:
+            radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 35%),
+            linear-gradient(135deg, #0ea5e9, #1e293b);
+    }
+
+    .support-solution .solution-icon {
+        background:
+            radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 35%),
+            linear-gradient(135deg, #38bdf8, #1e3a8a);
+    }
+
+    .solution-card h4 {
+        font-weight: 900;
+        color: #111827;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .solution-card p {
+        color: #64748b;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .solution-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .solution-tag {
+        text-decoration: none;
+        background: #eff6ff;
+        color: #1e3a8a;
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        padding: 8px 13px;
+        font-size: 0.88rem;
+        font-weight: 900;
+        transition: 0.2s ease;
+    }
+
+    .solution-tag:hover {
+        background: #2563eb;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+
+    .step-card {
+        height: 100%;
+        background: #ffffff;
+        border: 1px solid #e5eaf3;
+        border-radius: 26px;
+        padding: 26px;
+        transition: 0.22s ease;
+        box-shadow: 0 16px 35px rgba(15, 23, 42, 0.05);
+    }
+
+    .step-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 24px 55px rgba(37, 99, 235, 0.14);
+        border-color: #bfdbfe;
+    }
+
+    .step-number {
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #2563eb, #0ea5e9);
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        margin-bottom: 16px;
+        box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .mini-panel {
+        border-radius: 30px;
+        background:
+            radial-gradient(circle at left, rgba(96, 165, 250, 0.35), transparent 35%),
+            linear-gradient(135deg, #1e293b, #020617);
+        color: #ffffff;
+        padding: 34px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+    }
+
+    .mini-panel-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-wrapper {
+            padding: 38px 22px;
+            border-radius: 26px;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+        }
+
+        .action-panel {
+            margin-top: 28px;
+        }
+    }
+</style>
+
+<div class="container home-page mt-5 mb-5">
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-center rounded-4">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <section class="hero-wrapper mb-5">
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <div class="hero-badge mb-4">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    @T("منصة إنقاذ الأعطال قبل المناسبات", "Emergency fixes before events")
+                </div>
+
+                <h1 class="hero-title mb-4">
+                    @T("عندك مشكلة قبل المناسبة؟", "Problem before your event?")
+                    <br />
+                    <span class="highlight">EventRescue</span> @T("يساعدك", "rescues you")
+                </h1>
+
+                <p class="hero-text mb-4">dh
+                    @T(
+                        "منصة تساعد العميل عند وجود عطل أو احتياج عاجل قبل المناسبة، مثل إصلاح الأثاث، تجهيز المكان، أو طلب خدمات مساندة بسرعة.",
+                        "A platform that helps customers when an urgent issue happens before an event, such as furniture repair, venue setup, or quick support services."
+                    )
+                </p>
+
+                <div class="hero-actions d-flex flex-wrap gap-2">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="EventRequests" asp-action="Create" class="btn btn-primary btn-lg">
+                            <i class="bi bi-calendar-plus"></i>
+                            @T("عندي مناسبة", "I Have an Event")
+                        </a>
+
+                        <a asp-controller="EventRequests" asp-action="MyRequests" class="btn btn-light btn-lg">
+                            <i class="bi bi-list-check"></i>
+                            @T("طلباتي", "My Requests")
+                        </a>
+
+                        <a asp-controller="Account" asp-action="Profile" class="btn btn-light btn-lg">
+                            <i class="bi bi-person-circle"></i>
+                            @T("ملفي الشخصي", "My Profile")
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg">
+                            <i class="bi bi-person-plus"></i>
+                            @T("إنشاء حساب", "Create Account")
+                        </a>
+
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-light btn-lg">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            @T("تسجيل الدخول", "Login")
+                        </a>
+                    }
+                </div>
+
+            </div>
+
+            <div class="col-lg-5">
+                <div class="action-panel">
+                    <div class="action-panel-inner">
+
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div class="panel-icon">
+                                <i class="bi bi-tools"></i>
+                            </div>
+
+                            <span class="start-badge">
+                                @T("إنقاذ سريع", "Quick Rescue")
+                            </span>
+                        </div>
+
+                        <h4 class="fw-bold mb-2">
+                            @T("كيف يبدأ الطلب؟", "How does the request start?")
+                        </h4>
+
+                        <p class="text-muted mb-4">
+                            @T(
+                                "حدد نوع المشكلة، اكتب التفاصيل، ثم تابع حالة طلبك.",
+                                "Choose the problem type, write the details, then track your request."
+                            )
+                        </p>
+
+                        <div class="guide-item">
+                            <div class="guide-number">1</div>
+                            <div>
+                                <h6 class="fw-bold mb-1">
+                                    @T("اختر نوع المشكلة", "Choose the problem type")
+                                </h6>
+                                <p class="text-muted mb-0 small">
+                                    @T("إصلاح، تجهيز، أو خدمة مساندة.", "Repair, setup, or support service.")
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-number">2</div>
+                            <div>
+                                <h6 class="fw-bold mb-1">
+                                    @T("اكتب التفاصيل", "Write the details")
+                                </h6>
+                                <p class="text-muted mb-0 small">
+                                    @T("وضح المشكلة وموعد المناسبة.", "Explain the problem and event date.")
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="guide-item">
+                            <div class="guide-number">3</div>
+                            <div>
+                                <h6 class="fw-bold mb-1">
+                                    @T("تابع الطلب", "Track the request")
+                                </h6>
+                                <p class="text-muted mb-0 small">
+                                    @T("من صفحة طلباتي بسهولة.", "Easily from the My Requests page.")
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h6 class="fw-bold mb-2">
+                                @T("أمثلة:", "Examples:")
+                            </h6>
+
+                            <span class="service-mini">
+                                <i class="bi bi-tools"></i>
+                                @T("إصلاح أثاث", "Furniture Repair")
+                            </span>
+
+                            <span class="service-mini">
+                                <i class="bi bi-diamond-half"></i>
+                                @T("كنب", "Sofas")
+                            </span>
+
+                            <span class="service-mini">
+                                <i class="bi bi-house-heart-fill"></i>
+                                @T("خيام", "Tents")
+                            </span>
+
+                            <span class="service-mini">
+                                <i class="bi bi-intersect"></i>
+                                @T("كراسي وطاولات", "Tables & Chairs")
+                            </span>
+                        </div>
+
+                        <div class="mt-4">
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="EventRequests" asp-action="Create" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">
+                                    <i class="bi bi-plus-circle"></i>
+                                    @T("إنشاء طلب الآن", "Create Request Now")
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Register" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">
+                                    <i class="bi bi-person-plus"></i>
+                                    @T("إنشاء حساب للبدء", "Create Account to Start")
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mb-5">
+
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <h2 class="section-title mb-1">
+                    @T("إنقاذ الأعطال قبل المناسبة", "Event Rescue Solutions")
+                </h2>
+                <p class="text-muted mb-0">
+                    @T(
+                        "اخترنا لك الحلول حسب نوع المشكلة: إصلاح، تجهيز، أو دعم سريع.",
+                        "Solutions grouped by problem type: repair, setup, or quick support."
+                    )
+                </p>
+            </div>
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="EventRequests" asp-action="Create" class="btn btn-outline-primary rounded-pill">
+                    @T("إرسال طلب الآن", "Send Request Now")
+                </a>
+            }
+        </div>
+
+        @if (!categories.Any())
+        {
+            <div class="alert alert-light border rounded-4 text-center">
+                @T("لا توجد أقسام حاليًا", "No categories yet")
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+
+                <div class="col-lg-4">
+                    <div class="solution-card repair-solution featured-solution">
+                        <div class="solution-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+
+                        <h4>@T("إصلاحات عاجلة", "Urgent Repairs")</h4>
+
+                        <p>
+                            @T(
+                                "للمشاكل التي تظهر فجأة قبل المناسبة وتحتاج حل سريع.",
+                                "For sudden problems that appear before the event and need a quick fix."
+                            )
+                        </p>
+
+                        <div class="solution-tags">
+                            @foreach (var category in repairCategories)
+                            {
+                                var categoryName = category.Name.Trim();
+
+                                if (isEnglish && categoryTranslations.ContainsKey(categoryName))
+                                {
+                                    categoryName = categoryTranslations[categoryName];
+                                }
+
+                                <a asp-controller="@cardController"
+                                   asp-action="@cardAction"
+                                   asp-route-categoryId="@category.Id"
+                                   class="solution-tag">
+                                    @categoryName
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="solution-card setup-solution">
+                        <div class="solution-icon">
+                            <i class="bi bi-house-heart-fill"></i>
+                        </div>
+
+                        <h4>@T("تجهيز المكان", "Venue Setup")</h4>
+
+                        <p>
+                            @T(
+                                "كل ما تحتاجينه لترتيب المجلس أو مكان المناسبة قبل حضور الضيوف.",
+                                "Everything needed to prepare the gathering space before guests arrive."
+                            )
+                        </p>
+
+                        <div class="solution-tags">
+                            @foreach (var category in setupCategories)
+                            {
+                                var categoryName = category.Name.Trim();
+
+                                if (isEnglish && categoryTranslations.ContainsKey(categoryName))
+                                {
+                                    categoryName = categoryTranslations[categoryName];
+                                }
+
+                                <a asp-controller="@cardController"
+                                   asp-action="@cardAction"
+                                   asp-route-categoryId="@category.Id"
+                                   class="solution-tag">
+                                    @categoryName
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="solution-card support-solution">
+                        <div class="solution-icon">
+                            <i class="bi bi-life-preserver"></i>
+                        </div>
+
+                        <h4>@T("دعم سريع", "Quick Support")</h4>
+
+                        <p>
+                            @T(
+                                "خدمات مساندة تساعدك في آخر لحظة قبل أو أثناء يوم المناسبة.",
+                                "Support services that help at the last minute before or during the event day."
+                            )
+                        </p>
+
+                        <div class="solution-tags">
+                            @foreach (var category in supportCategories)
+                            {
+                                var categoryName = category.Name.Trim();
+
+                                if (isEnglish && categoryTranslations.ContainsKey(categoryName))
+                                {
+                                    categoryName = categoryTranslations[categoryName];
+                                }
+
+                                <a asp-controller="@cardController"
+                                   asp-action="@cardAction"
+                                   asp-route-categoryId="@category.Id"
+                                   class="solution-tag">
+                                    @categoryName
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </section>
+
+    <section class="mb-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title mb-1">
+                @T("كيف تعمل المنصة؟", "How does the platform work?")
+            </h2>
+            <p class="text-muted mb-0">
+                @T(
+                    "خطوات واضحة من بداية الطلب حتى متابعة حالته.",
+                    "Clear steps from creating the request to tracking its status."
+                )
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h5 class="fw-bold">@T("إنشاء الطلب", "Create the request")</h5>
+                    <p class="text-muted mb-0">
+                        @T(
+                            "يختار العميل نوع المشكلة، يكتب وصف الطلب، يحدد العنوان، ويرفع صورة عند الحاجة.",
+                            "The customer chooses the problem type, writes the request details, adds the location, and uploads an image when needed."
+                        )
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h5 class="fw-bold">@T("ظهور الطلب للمزودين", "Request appears to providers")</h5>
+                    <p class="text-muted mb-0">
+                        @T(
+                            "يظهر الطلب لمزودي الخدمة المناسبين حسب المدينة والتخصص.",
+                            "The request appears to suitable service providers based on city and specialty."
+                        )
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h5 class="fw-bold">@T("متابعة الحالة", "Track the status")</h5>
+                    <p class="text-muted mb-0">
+                        @T(
+                            "يستطيع العميل متابعة الطلب من صفحة طلباتي ومعرفة حالته بسهولة.",
+                            "The customer can track the request and its status easily from the My Requests page."
+                        )
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mini-panel">
+        <div class="mini-panel-content">
+            <div class="row align-items-center">
+
+                <div class="col-lg-8 mb-3 mb-lg-0">
+                    <h3 class="fw-bold mb-2">
+                        @T("جاهز تبدأ طلبك؟", "Ready to start your request?")
+                    </h3>
+
+                    <p class="text-white-50 mb-0">
+                        @T(
+                            "أنشئ طلبًا واضحًا مع صورة وتفاصيل، ليسهل على مزود الخدمة فهم المشكلة.",
+                            "Create a clear request with an image and details so the provider can understand the problem."
+                        )
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-start text-center">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="EventRequests" asp-action="Create" class="btn btn-primary btn-lg rounded-pill px-4">
+                            @T("عندي مناسبة", "I Have an Event")
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg rounded-pill px-4">
+                            @T("إنشاء حساب الآن", "Create Account Now")
+                        </a>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>

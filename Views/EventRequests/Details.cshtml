@@ -1,0 +1,347 @@
+@model EventRescue.Models.EventRequest
+@using EventRescue.Models.Enums
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<EventRescue.SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["DetailsPageTitle"];
+
+    var isEnglish = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("en");
+
+    var categoryTranslations = new Dictionary<string, string>
+    {
+        { "قهوجي أو قهوجية", "Coffee Server" },
+        { "مقدمات ضيافة", "Hospitality Hostesses" },
+        { "عاملة تنظيف", "Cleaning Worker" },
+        { "فني إصلاح أثاث", "Furniture Repair Technician" },
+        { "منسق ورد", "Flower Coordinator" },
+        { "مصور مناسبات", "Event Photographer" },
+        { "شيف منزلي", "Home Chef" },
+        { "سائق توصيل", "Delivery Driver" },
+        { "كراسي وطاولات", "Tables and Chairs" },
+        { "كنب", "Sofas" },
+        { "خيام", "Tents" },
+        { "سخانات ومبردات", "Heaters and Coolers" }
+    };
+
+    var regionTranslations = new Dictionary<string, string>
+    {
+        { "الرياض", "Riyadh" },
+        { "جدة", "Jeddah" },
+        { "الدمام", "Dammam" },
+        { "مكة", "Makkah" },
+        { "المدينة المنورة", "Madinah" }
+    };
+
+    string statusText = Model.Status switch
+    {
+        EventStatus.Pending => Localizer["MyRequestsStatusPending"].Value,
+        EventStatus.Accepted => Localizer["MyRequestsStatusAccepted"].Value,
+        EventStatus.Completed => Localizer["MyRequestsStatusCompleted"].Value,
+        EventStatus.Canceled => Localizer["MyRequestsStatusCanceled"].Value,
+        _ => Localizer["MyRequestsStatusUnknown"].Value
+    };
+
+    string statusClass = Model.Status switch
+    {
+        EventStatus.Pending => "er-status-pending",
+        EventStatus.Accepted => "er-status-accepted",
+        EventStatus.Completed => "er-status-completed",
+        EventStatus.Canceled => "er-status-canceled",
+        _ => "er-status-pending"
+    };
+
+    string statusIcon = Model.Status switch
+    {
+        EventStatus.Pending => "bi-hourglass-split",
+        EventStatus.Accepted => "bi-check2-circle",
+        EventStatus.Completed => "bi-patch-check",
+        EventStatus.Canceled => "bi-x-circle",
+        _ => "bi-info-circle"
+    };
+
+    string categoryName = Model.Category?.Name?.Trim() ?? Localizer["MyRequestsNotSpecified"].Value;
+
+    if (isEnglish && Model.Category != null && categoryTranslations.ContainsKey(categoryName))
+    {
+        categoryName = categoryTranslations[categoryName];
+    }
+
+    string regionName = Model.Region?.Name?.Trim() ?? Localizer["MyRequestsNotSpecifiedFemale"].Value;
+
+    if (isEnglish && Model.Region != null && regionTranslations.ContainsKey(regionName))
+    {
+        regionName = regionTranslations[regionName];
+    }
+}
+
+<style>
+    .er-page {
+        direction: rtl;
+    }
+
+    html[dir="ltr"] .er-page {
+        direction: ltr;
+    }
+</style>
+
+<div class="container er-page mt-4 mb-5">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show rounded-4">
+            <i class="bi bi-check-circle-fill"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show rounded-4">
+            <i class="bi bi-exclamation-triangle-fill"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <section class="er-hero mb-4">
+        <div class="er-hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="er-badge">
+                        <i class="bi bi-file-earmark-text"></i>
+                        @Localizer["DetailsBadge"]
+                    </div>
+
+                    <h1 class="er-title">@Model.Title</h1>
+
+                    <p class="er-subtitle mb-0">
+                        @Localizer["DetailsHeroText"]
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-start text-center mt-4 mt-lg-0">
+                    <span class="er-status @statusClass" style="font-size: 1rem; padding: 10px 20px;">
+                        <i class="bi @statusIcon"></i>
+                        @statusText
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row g-4">
+
+        <div class="col-lg-5">
+            <div class="er-card overflow-hidden h-100">
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="@Model.ImagePath"
+                         alt="@Localizer["MyRequestsImageAlt"]"
+                         style="width: 100%; height: 420px; object-fit: cover;" />
+                }
+                else
+                {
+                    <div class="d-flex align-items-center justify-content-center"
+                         style="height: 420px; background: var(--er-soft-blue); color: var(--er-blue); font-size: 4rem;">
+                        <i class="bi bi-image"></i>
+                    </div>
+                }
+
+                <div class="p-3 border-top er-muted small">
+                    <i class="bi bi-info-circle text-primary"></i>
+                    @Localizer["DetailsImageHelpText"]
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="er-card er-card-body h-100">
+
+                <h5 class="fw-bold mb-3">@Localizer["DetailsDescriptionTitle"]</h5>
+
+                <div class="er-action mb-4" style="line-height: 1.9;">
+                    @Model.Description
+                </div>
+
+                <h5 class="fw-bold mb-3">@Localizer["DetailsInfoTitle"]</h5>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="er-action py-2 h-100">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="er-soft-icon"><i class="bi bi-tools"></i></span>
+                                <div>
+                                    <div class="er-muted small">@Localizer["DetailsServiceType"]</div>
+                                    <div class="fw-bold">@categoryName</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="er-action py-2 h-100">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="er-soft-icon"><i class="bi bi-geo-alt"></i></span>
+                                <div>
+                                    <div class="er-muted small">@Localizer["DetailsCity"]</div>
+                                    <div class="fw-bold">@regionName</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="er-action py-2 h-100">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="er-soft-icon"><i class="bi bi-calendar-event"></i></span>
+                                <div>
+                                    <div class="er-muted small">@Localizer["DetailsEventDate"]</div>
+                                    <div class="fw-bold">@Model.EventDate.ToString("yyyy/MM/dd — hh:mm tt")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="er-action py-2 h-100">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="er-soft-icon"><i class="bi bi-clock"></i></span>
+                                <div>
+                                    <div class="er-muted small">@Localizer["DetailsCreatedAt"]</div>
+                                    <div class="fw-bold">@Model.CreatedAt.ToString("yyyy/MM/dd")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="er-action py-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="er-soft-icon"><i class="bi bi-house-door"></i></span>
+                                <div>
+                                    <div class="er-muted small">@Localizer["DetailsAddress"]</div>
+                                    <div class="fw-bold">@Model.Address</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.Status == EventStatus.Accepted && Model.AcceptedProvider != null)
+                {
+                    <h5 class="fw-bold mb-3">@Localizer["DetailsApprovedProvider"]</h5>
+
+                    <div class="er-action mb-4" style="background: #dcfce7; border-color: #86efac;">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="er-soft-icon" style="background: #bbf7d0; color: #166534;">
+                                <i class="bi bi-patch-check-fill"></i>
+                            </span>
+
+                            <div>
+                                <div class="fw-bold">@Model.AcceptedProvider.FullName</div>
+
+                                <a href="tel:@Model.AcceptedProvider.PhoneNumber" class="small" dir="ltr">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    @(Model.AcceptedProvider.PhoneNumber ?? Localizer["DetailsNoPhone"].Value)
+                                </a>
+                            </div>
+                        </div>
+
+                        <span class="er-status er-status-completed">
+                            @Localizer["DetailsContactNow"]
+                        </span>
+                    </div>
+                }
+                else if (Model.Status == EventStatus.Pending)
+                {
+                    <h5 class="fw-bold mb-3">
+                        @Localizer["DetailsOffersTitle"] (@Model.ProviderOffers.Count)
+                    </h5>
+
+                    @if (!Model.ProviderOffers.Any())
+                    {
+                        <div class="er-action mb-4 justify-content-center er-muted">
+                            <span>
+                                <i class="bi bi-hourglass"></i>
+                                @Localizer["DetailsNoOffers"]
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-grid gap-2 mb-4">
+                            @foreach (var offer in Model.ProviderOffers.OrderBy(o => o.Price))
+                            {
+                                <div class="er-action py-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="er-soft-icon"><i class="bi bi-person-badge"></i></span>
+
+                                        <div>
+                                            <div class="fw-bold">
+                                                @(offer.Provider?.FullName ?? Localizer["DetailsDefaultProvider"].Value)
+                                            </div>
+
+                                            <div class="er-muted small">
+                                                <i class="bi bi-cash-stack"></i>
+                                                @offer.Price @Localizer["DetailsRiyal"]
+                                                &nbsp;•&nbsp;
+                                                <i class="bi bi-clock"></i>
+                                                @offer.OfferDate.ToString("yyyy/MM/dd — hh:mm tt")
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form asp-controller="Providers"
+                                          asp-action="AcceptOffer"
+                                          method="post"
+                                          onsubmit="return confirm('@Localizer["DetailsConfirmAccept"]');">
+                                        @Html.AntiForgeryToken()
+
+                                        <input type="hidden" name="offerId" value="@offer.Id" />
+
+                                        <button type="submit" class="btn btn-success er-btn">
+                                            <i class="bi bi-check2-circle"></i>
+                                            @Localizer["DetailsAccept"]
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 border-top pt-3">
+                    <a asp-action="MyRequests" class="btn btn-outline-primary er-btn">
+                        <i class="bi bi-arrow-right"></i>
+                        @Localizer["DetailsBackToMyRequests"]
+                    </a>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        @if (Model.Status == EventStatus.Pending)
+                        {
+                            <form asp-action="Cancel"
+                                  asp-route-id="@Model.Id"
+                                  method="post"
+                                  onsubmit="return confirm('@Localizer["DetailsConfirmCancel"]');">
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit" class="btn btn-outline-danger er-btn">
+                                    <i class="bi bi-x-circle"></i>
+                                    @Localizer["DetailsCancelRequest"]
+                                </button>
+                            </form>
+                        }
+
+                        <a asp-action="Create" class="btn btn-primary er-btn">
+                            <i class="bi bi-plus-circle"></i>
+                            @Localizer["DetailsNewRequest"]
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

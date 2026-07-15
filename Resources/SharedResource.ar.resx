@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="AccountLogin" xml:space="preserve">
+    <value>دخول الحساب</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>يرجى إدخال بيانات الحساب للمتابعة.</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>أهلاً بعودتك</value>
+  </data>
+  <data name="LoginText" xml:space="preserve">
+    <value>يمكنك متابعة الطلبات وإنشاء طلب خدمة جديد بسهولة.</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>دخول</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+  <data name="MyRequests" xml:space="preserve">
+    <value>طلباتي</value>
+  </data>
+  <data name="CreateRequest" xml:space="preserve">
+    <value>إنشاء طلب</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+
+  <data name="AvailableRequests" xml:space="preserve">
+  <value>الطلبات المتاحة</value>
+</data>
+<data name="MyTasks" xml:space="preserve">
+  <value>مهامي</value>
+</data>
+<data name="TodayEmergency" xml:space="preserve">
+  <value>طوارئ اليوم</value>
+</data>
+<data name="IHaveEvent" xml:space="preserve">
+  <value>عندي مناسبة</value>
+</data>
+<data name="Dashboard" xml:space="preserve">
+  <value>لوحة التحكم</value>
+</data>
+
+
+<data name="FullName" xml:space="preserve">
+  <value>الاسم الكامل</value>
+</data>
+<data name="ConfirmPassword" xml:space="preserve">
+  <value>تأكيد كلمة المرور</value>
+</data>
+<data name="Region" xml:space="preserve">
+  <value>المدينة</value>
+</data>
+<data name="AccountType" xml:space="preserve">
+  <value>نوع الحساب</value>
+</data>
+<data name="Client" xml:space="preserve">
+  <value>مستفيد</value>
+</data>
+<data name="Provider" xml:space="preserve">
+  <value>مزود خدمة</value>
+</data>
+<data name="Category" xml:space="preserve">
+  <value>التخصص</value>
+</data>
+<data name="ChooseCity" xml:space="preserve">
+  <value>-- اختر المدينة --</value>
+</data>
+<data name="ChooseCategory" xml:space="preserve">
+  <value>-- اختر التخصص --</value>
+</data>
+<data name="RegisterSubtitle" xml:space="preserve">
+  <value>يرجى إدخال بيانات الحساب للبدء.</value>
+</data>
+<data name="HaveAccount" xml:space="preserve">
+  <value>لديك حساب؟</value>
+</data>
+
+
+
+<data name="RegisterNewAccount" xml:space="preserve">
+  <value>إنشاء حساب جديد</value>
+</data>
+<data name="EmergencySolutionsPlatform" xml:space="preserve">
+  <value>منصة حلول عاجلة</value>
+</data>
+<data name="StartJourney" xml:space="preserve">
+  <value>ابدأ رحلتك مع</value>
+</data>
+<data name="RegisterBrandText" xml:space="preserve">
+  <value>حسابك يساعدك على طلب خدمة عاجلة قبل المناسبة أو تقديم خدماتك كمزود مناسب حسب المدينة والتخصص.</value>
+</data>
+<data name="OrganizedRequests" xml:space="preserve">
+  <value>طلبات منظمة</value>
+</data>
+<data name="OrganizedRequestsText" xml:space="preserve">
+  <value>إرسال طلب واضح ومتابعة حالته بسهولة.</value>
+</data>
+<data name="ByCity" xml:space="preserve">
+  <value>حسب المدينة</value>
+</data>
+<data name="ByCityText" xml:space="preserve">
+  <value>ربط الطلبات بالمزودين المناسبين في نفس المنطقة.</value>
+</data>
+<data name="SuitableServices" xml:space="preserve">
+  <value>خدمات مناسبة</value>
+</data>
+<data name="SuitableServicesText" xml:space="preserve">
+  <value>إصلاحات منزلية مهمة قبل موعد المناسبة.</value>
+</data>
+<data name="FullNamePlaceholder" xml:space="preserve">
+  <value>مثال: ريما أحمد</value>
+</data>
+
+<data name="CreateRequestPageTitle" xml:space="preserve"><value>إنشاء طلب جديد</value></data>
+<data name="NewServiceRequest" xml:space="preserve"><value>طلب خدمة جديد</value></data>
+<data name="SubmitRequestClearly" xml:space="preserve"><value>ارفع طلبك بوضوح</value></data>
+<data name="CreateRequestHeroText" xml:space="preserve"><value>حدد نوع الخدمة، اكتب تفاصيل المشكلة، وأرفق صورة عند الحاجة حتى يصل طلبك لمزودي الخدمة المناسبين.</value></data>
+<data name="ViewMyRequests" xml:space="preserve"><value>عرض طلباتي</value></data>
+<data name="RequestInformation" xml:space="preserve"><value>بيانات الطلب</value></data>
+<data name="RequestInformationText" xml:space="preserve"><value>اكتب المعلومات الأساسية بشكل واضح حتى يستطيع مزود الخدمة فهم الطلب بسرعة.</value></data>
+<data name="ServiceType" xml:space="preserve"><value>نوع الخدمة</value></data>
+<data name="ChooseServiceType" xml:space="preserve"><value>-- اختار نوع الخدمة --</value></data>
+<data name="RequestTitle" xml:space="preserve"><value>عنوان الطلب</value></data>
+<data name="RequestTitlePlaceholder" xml:space="preserve"><value>مثال: كنب مكسور قبل المناسبة</value></data>
+<data name="ProblemDescription" xml:space="preserve"><value>وصف المشكلة</value></data>
+<data name="ProblemDescriptionPlaceholder" xml:space="preserve"><value>اكتب تفاصيل المشكلة وما المطلوب من مزود الخدمة</value></data>
+<data name="EventDate" xml:space="preserve"><value>تاريخ المناسبة</value></data>
+<data name="AddressNeighborhood" xml:space="preserve"><value>العنوان / الحي</value></data>
+<data name="AddressPlaceholder" xml:space="preserve"><value>مثال: حي السلام، شارع الملك عبدالله</value></data>
+<data name="ProblemImage" xml:space="preserve"><value>صورة المشكلة</value></data>
+<data name="ImageHelpText" xml:space="preserve"><value>الصورة اختيارية، لكنها تساعد مزود الخدمة على فهم المشكلة بشكل أسرع.</value></data>
+<data name="SendRequest" xml:space="preserve"><value>إرسال الطلب</value></data>
+<data name="BeforeSendRequest" xml:space="preserve"><value>قبل إرسال الطلب</value></data>
+<data name="CompleteInfoCheck" xml:space="preserve"><value>تأكد من اكتمال المعلومات الأساسية.</value></data>
+<data name="ChooseServiceHintTitle" xml:space="preserve"><value>اختاري نوع الخدمة</value></data>
+<data name="ChooseServiceHintText" xml:space="preserve"><value>اختار التصنيف الأقرب للمشكلة حتى يصل الطلب للمزود المناسب.</value></data>
+<data name="ClearDescriptionHintTitle" xml:space="preserve"><value>اكتب وصفًا واضحًا</value></data>
+<data name="ClearDescriptionHintText" xml:space="preserve"><value>اذكر المشكلة باختصار مع توضيح المطلوب تنفيذه.</value></data>
+<data name="AttachImageHintTitle" xml:space="preserve"><value>أرفق صورة</value></data>
+<data name="AttachImageHintText" xml:space="preserve"><value>الصورة تساعد مزود الخدمة على تقييم الحالة بشكل أسرع.</value></data>
+<data name="Note" xml:space="preserve"><value>ملاحظة</value></data>
+<data name="AutoCityNote" xml:space="preserve"><value>يتم تحديد المدينة تلقائيًا من بيانات الحساب، لذلك لا حاجة لإدخالها داخل الطلب.</value></data>
+<data name="MyRequestsTracking" xml:space="preserve"><value>متابعة الطلبات</value></data>
+<data name="MyRequestsHeroText" xml:space="preserve"><value>تابعي جميع الطلبات التي أرسلتيها، حالة كل طلب، وتفاصيل الخدمة المطلوبة في مكان واحد.</value></data>
+<data name="MyRequestsCreateNew" xml:space="preserve"><value>إنشاء طلب جديد</value></data>
+<data name="MyRequestsTotal" xml:space="preserve"><value>إجمالي الطلبات</value></data>
+<data name="MyRequestsPending" xml:space="preserve"><value>متاحة للعروض</value></data>
+<data name="MyRequestsAccepted" xml:space="preserve"><value>طلبات مقبولة</value></data>
+<data name="MyRequestsCompleted" xml:space="preserve"><value>طلبات مكتملة</value></data>
+<data name="MyRequestsCanceled" xml:space="preserve"><value>طلبات ملغية</value></data>
+<data name="MyRequestsListTitle" xml:space="preserve"><value>قائمة الطلبات</value></data>
+<data name="MyRequestsListText" xml:space="preserve"><value>تعرض هذه الصفحة الطلبات مرتبة من الأحدث إلى الأقدم.</value></data>
+<data name="BackToUserDashboard" xml:space="preserve"><value>العودة للوحة المستخدم</value></data>
+<data name="NoRequestsYet" xml:space="preserve"><value>لا توجد طلبات حتى الآن</value></data>
+<data name="NoRequestsYetText" xml:space="preserve"><value>ابدئي بإنشاء طلب جديد ليظهر لمزودي الخدمة المناسبين حسب المدينة ونوع الخدمة.</value></data>
+<data name="MyRequestsStatusPending" xml:space="preserve"><value>متاح للعروض</value></data>
+<data name="MyRequestsStatusAccepted" xml:space="preserve"><value>مقبول</value></data>
+<data name="MyRequestsStatusCompleted" xml:space="preserve"><value>مكتمل</value></data>
+<data name="MyRequestsStatusCanceled" xml:space="preserve"><value>ملغي</value></data>
+<data name="MyRequestsStatusUnknown" xml:space="preserve"><value>غير معروف</value></data>
+<data name="MyRequestsImageAlt" xml:space="preserve"><value>صورة الطلب</value></data>
+<data name="MyRequestsServiceLabel" xml:space="preserve"><value>الخدمة:</value></data>
+<data name="MyRequestsAppointmentLabel" xml:space="preserve"><value>الموعد:</value></data>
+<data name="MyRequestsCityLabel" xml:space="preserve"><value>المدينة:</value></data>
+<data name="MyRequestsSentDateLabel" xml:space="preserve"><value>تاريخ الإرسال:</value></data>
+<data name="MyRequestsViewDetails" xml:space="preserve"><value>عرض التفاصيل</value></data>
+<data name="MyRequestsNotSpecified" xml:space="preserve"><value>غير محدد</value></data>
+<data name="MyRequestsNotSpecifiedFemale" xml:space="preserve"><value>غير محددة</value></data>
+
+<data name="DetailsPageTitle" xml:space="preserve"><value>تفاصيل الطلب</value></data>
+<data name="DetailsBadge" xml:space="preserve"><value>تفاصيل الطلب</value></data>
+<data name="DetailsHeroText" xml:space="preserve"><value>مراجعة كاملة لبيانات الطلب، الخدمة المطلوبة، الموقع، والحالة الحالية.</value></data>
+<data name="DetailsImageHelpText" xml:space="preserve"><value>صورة الطلب تساعد مزود الخدمة على فهم المشكلة بشكل أسرع.</value></data>
+<data name="DetailsDescriptionTitle" xml:space="preserve"><value>وصف الطلب</value></data>
+<data name="DetailsInfoTitle" xml:space="preserve"><value>بيانات الطلب</value></data>
+<data name="DetailsServiceType" xml:space="preserve"><value>نوع الخدمة</value></data>
+<data name="DetailsCity" xml:space="preserve"><value>المدينة</value></data>
+<data name="DetailsEventDate" xml:space="preserve"><value>موعد المناسبة</value></data>
+<data name="DetailsCreatedAt" xml:space="preserve"><value>تاريخ إرسال الطلب</value></data>
+<data name="DetailsAddress" xml:space="preserve"><value>العنوان / الحي</value></data>
+<data name="DetailsApprovedProvider" xml:space="preserve"><value>الفني المعتمد</value></data>
+<data name="DetailsNoPhone" xml:space="preserve"><value>لم يسجل رقم جوال</value></data>
+<data name="DetailsContactNow" xml:space="preserve"><value>تواصلي معه الآن</value></data>
+<data name="DetailsOffersTitle" xml:space="preserve"><value>العروض المقدمة</value></data>
+<data name="DetailsNoOffers" xml:space="preserve"><value>لا توجد عروض بعد — سيظهر طلبك للفنيين المتخصصين في مدينتك</value></data>
+<data name="DetailsDefaultProvider" xml:space="preserve"><value>فني</value></data>
+<data name="DetailsRiyal" xml:space="preserve"><value>ريال</value></data>
+<data name="DetailsAccept" xml:space="preserve"><value>موافقة</value></data>
+<data name="DetailsConfirmAccept" xml:space="preserve"><value>اعتماد هذا الفني وقبول عرضه؟</value></data>
+<data name="DetailsBackToMyRequests" xml:space="preserve"><value>العودة إلى طلباتي</value></data>
+<data name="DetailsCancelRequest" xml:space="preserve"><value>إلغاء الطلب</value></data>
+<data name="DetailsConfirmCancel" xml:space="preserve"><value>هل أنت متأكد من إلغاء هذا الطلب؟</value></data>
+<data name="DetailsNewRequest" xml:space="preserve"><value>طلب جديد</value></data>
+
+<data name="ProfileDashboardTitle" xml:space="preserve"><value>لوحة المستخدم</value></data>
+<data name="ProfileAccountTypeProvider" xml:space="preserve"><value>مزود خدمة</value></data>
+<data name="ProfileAccountTypeClient" xml:space="preserve"><value>مستفيد</value></data>
+<data name="ProfilePhoneNotAdded" xml:space="preserve"><value>غير مضاف</value></data>
+<data name="ProfileRegionNotSpecified" xml:space="preserve"><value>غير محددة</value></data>
+<data name="ProfileSpecialtyNotSpecified" xml:space="preserve"><value>غير محدد</value></data>
+<data name="ProfileEdit" xml:space="preserve"><value>تعديل الملف الشخصي</value></data>
+<data name="ProfileNewRequest" xml:space="preserve"><value>طلب جديد</value></data>
+<data name="ProfileBadge" xml:space="preserve"><value>لوحة المستخدم</value></data>
+<data name="ProfileWelcome" xml:space="preserve"><value>مرحبًا،</value></data>
+<data name="ProfileHeroText" xml:space="preserve"><value>يمكنك من هنا إدارة حسابك، إنشاء طلب جديد، ومتابعة حالة الطلبات الخاصة بك.</value></data>
+<data name="ProfileCreateNewRequest" xml:space="preserve"><value>إنشاء طلب جديد</value></data>
+<data name="ProfileTotalRequests" xml:space="preserve"><value>إجمالي الطلبات</value></data>
+<data name="ProfileAvailableOffers" xml:space="preserve"><value>متاحة للعروض</value></data>
+<data name="ProfileAccepted" xml:space="preserve"><value>مقبولة</value></data>
+<data name="ProfileCanceled" xml:space="preserve"><value>ملغية</value></data>
+<data name="ProfileAccountInfo" xml:space="preserve"><value>بيانات الحساب</value></data>
+<data name="ProfileFullName" xml:space="preserve"><value>الاسم الكامل</value></data>
+<data name="ProfileEmail" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+<data name="ProfilePhone" xml:space="preserve"><value>رقم الجوال</value></data>
+<data name="ProfileCity" xml:space="preserve"><value>المدينة</value></data>
+<data name="ProfileQuickActions" xml:space="preserve"><value>إجراءات سريعة</value></data>
+<data name="ProfileEditAccountData" xml:space="preserve"><value>تعديل بيانات الحساب</value></data>
+<data name="ProfileViewMyRequests" xml:space="preserve"><value>عرض طلباتي</value></data>
+<data name="ProfileBackHome" xml:space="preserve"><value>العودة للرئيسية</value></data>
+<data name="ProfileLatestActivity" xml:space="preserve"><value>آخر نشاط</value></data>
+<data name="ProfileLatestActivityText" xml:space="preserve"><value>آخر طلب أو عملية مرتبطة بحسابك.</value></data>
+<data name="ProfileViewAll" xml:space="preserve"><value>عرض الكل</value></data>
+<data name="ProfileViewDetails" xml:space="preserve"><value>عرض التفاصيل</value></data>
+<data name="ProfileNoRequestsTitle" xml:space="preserve"><value>لا توجد طلبات حتى الآن</value></data>
+<data name="ProfileNoRequestsText" xml:space="preserve"><value>ابدأ بإنشاء أول طلب وسيظهر هنا.</value></data>
+<data name="ProfileCreateRequest" xml:space="preserve"><value>إنشاء طلب</value></data>
+<data name="ProfileProviderAccountTitle" xml:space="preserve"><value>حساب مزود خدمة</value></data>
+<data name="ProfileProviderAccountText" xml:space="preserve"><value>يمكن تعديل التخصص وحالة التوفر من صفحة تعديل الملف الشخصي.</value></data>
+<data name="ProfileStatusPending" xml:space="preserve"><value>متاح للعروض</value></data>
+<data name="ProfileStatusAccepted" xml:space="preserve"><value>مقبول</value></data>
+<data name="ProfileStatusCompleted" xml:space="preserve"><value>مكتمل</value></data>
+<data name="ProfileStatusCanceled" xml:space="preserve"><value>ملغي</value></data>
+<data name="ProfileStatusUnknown" xml:space="preserve"><value>غير معروف</value></data>
+
+<data name="EditProfilePageTitle" xml:space="preserve"><value>تعديل الملف الشخصي</value></data>
+<data name="EditProfileSubtitle" xml:space="preserve"><value>حدّثي بيانات حسابك الأساسية</value></data>
+<data name="ProviderServiceData" xml:space="preserve"><value>بيانات مزود الخدمة</value></data>
+<data name="AvailableNow" xml:space="preserve"><value>متاح الآن لاستقبال الطلبات</value></data>
+<data name="SaveChanges" xml:space="preserve"><value>حفظ التعديلات</value></data>
+<data name="BackToProfile" xml:space="preserve"><value>العودة للملف الشخصي</value></data>
+</root>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="AccountLogin" xml:space="preserve">
+    <value>Account Login</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Please enter your account information to continue.</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Welcome Back</value>
+  </data>
+  <data name="LoginText" xml:space="preserve">
+    <value>You can track your requests and create a new service request easily.</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="MyRequests" xml:space="preserve">
+    <value>My Requests</value>
+  </data>
+  <data name="CreateRequest" xml:space="preserve">
+    <value>Create Request</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="AvailableRequests" xml:space="preserve">
+  <value>Available Requests</value>
+</data>
+<data name="MyTasks" xml:space="preserve">
+  <value>My Tasks</value>
+</data>
+<data name="TodayEmergency" xml:space="preserve">
+  <value>Today Emergency</value>
+</data>
+<data name="IHaveEvent" xml:space="preserve">
+  <value>I Have an Event</value>
+</data>
+<data name="Dashboard" xml:space="preserve">
+  <value>Dashboard</value>
+</data>
+
+
+
+<data name="FullName" xml:space="preserve">
+  <value>Full Name</value>
+</data>
+<data name="ConfirmPassword" xml:space="preserve">
+  <value>Confirm Password</value>
+</data>
+<data name="Region" xml:space="preserve">
+  <value>City</value>
+</data>
+<data name="AccountType" xml:space="preserve">
+  <value>Account Type</value>
+</data>
+<data name="Client" xml:space="preserve">
+  <value>Client</value>
+</data>
+<data name="Provider" xml:space="preserve">
+  <value>Service Provider</value>
+</data>
+<data name="Category" xml:space="preserve">
+  <value>Specialty</value>
+</data>
+<data name="ChooseCity" xml:space="preserve">
+  <value>-- Select City --</value>
+</data>
+<data name="ChooseCategory" xml:space="preserve">
+  <value>-- Select Specialty --</value>
+</data>
+<data name="RegisterSubtitle" xml:space="preserve">
+  <value>Please enter your account information to get started.</value>
+</data>
+<data name="HaveAccount" xml:space="preserve">
+  <value>Already have an account?</value>
+</data>
+
+<data name="RegisterNewAccount" xml:space="preserve">
+  <value>Create New Account</value>
+</data>
+<data name="EmergencySolutionsPlatform" xml:space="preserve">
+  <value>Emergency Solutions Platform</value>
+</data>
+<data name="StartJourney" xml:space="preserve">
+  <value>Start your journey with</value>
+</data>
+<data name="RegisterBrandText" xml:space="preserve">
+  <value>Your account helps you request urgent service before an event or provide your services as a provider based on city and specialty.</value>
+</data>
+<data name="OrganizedRequests" xml:space="preserve">
+  <value>Organized Requests</value>
+</data>
+<data name="OrganizedRequestsText" xml:space="preserve">
+  <value>Send a clear request and track its status easily.</value>
+</data>
+<data name="ByCity" xml:space="preserve">
+  <value>By City</value>
+</data>
+<data name="ByCityText" xml:space="preserve">
+  <value>Connect requests with suitable providers in the same area.</value>
+</data>
+<data name="SuitableServices" xml:space="preserve">
+  <value>Suitable Services</value>
+</data>
+<data name="SuitableServicesText" xml:space="preserve">
+  <value>Important home repairs before the event date.</value>
+</data>
+<data name="FullNamePlaceholder" xml:space="preserve">
+  <value>Example: Sara Ahmed</value>
+</data>
+
+<data name="CreateRequestPageTitle" xml:space="preserve"><value>Create New Request</value></data>
+<data name="NewServiceRequest" xml:space="preserve"><value>New Service Request</value></data>
+<data name="SubmitRequestClearly" xml:space="preserve"><value>Submit Your Request Clearly</value></data>
+<data name="CreateRequestHeroText" xml:space="preserve"><value>Select the service type, describe the problem, and attach an image if needed so your request reaches the right providers.</value></data>
+<data name="ViewMyRequests" xml:space="preserve"><value>View My Requests</value></data>
+<data name="RequestInformation" xml:space="preserve"><value>Request Information</value></data>
+<data name="RequestInformationText" xml:space="preserve"><value>Write the basic information clearly so the service provider can understand your request quickly.</value></data>
+<data name="ServiceType" xml:space="preserve"><value>Service Type</value></data>
+<data name="ChooseServiceType" xml:space="preserve"><value>-- Select Service Type --</value></data>
+<data name="RequestTitle" xml:space="preserve"><value>Request Title</value></data>
+<data name="RequestTitlePlaceholder" xml:space="preserve"><value>Example: Broken sofa before the event</value></data>
+<data name="ProblemDescription" xml:space="preserve"><value>Problem Description</value></data>
+<data name="ProblemDescriptionPlaceholder" xml:space="preserve"><value>Write the problem details and what you need from the service provider</value></data>
+<data name="EventDate" xml:space="preserve"><value>Event Date</value></data>
+<data name="AddressNeighborhood" xml:space="preserve"><value>Address / Neighborhood</value></data>
+<data name="AddressPlaceholder" xml:space="preserve"><value>Example: Al Salam District, King Abdullah Street</value></data>
+<data name="ProblemImage" xml:space="preserve"><value>Problem Image</value></data>
+<data name="ImageHelpText" xml:space="preserve"><value>The image is optional, but it helps the service provider understand the problem faster.</value></data>
+<data name="SendRequest" xml:space="preserve"><value>Send Request</value></data>
+<data name="BeforeSendRequest" xml:space="preserve"><value>Before Sending the Request</value></data>
+<data name="CompleteInfoCheck" xml:space="preserve"><value>Make sure the basic information is complete.</value></data>
+<data name="ChooseServiceHintTitle" xml:space="preserve"><value>Choose the service type</value></data>
+<data name="ChooseServiceHintText" xml:space="preserve"><value>Select the closest category to the problem so the request reaches the right provider.</value></data>
+<data name="ClearDescriptionHintTitle" xml:space="preserve"><value>Write a clear description</value></data>
+<data name="ClearDescriptionHintText" xml:space="preserve"><value>Mention the problem briefly and explain what needs to be done.</value></data>
+<data name="AttachImageHintTitle" xml:space="preserve"><value>Attach an image</value></data>
+<data name="AttachImageHintText" xml:space="preserve"><value>An image helps the provider evaluate the case faster.</value></data>
+<data name="Note" xml:space="preserve"><value>Note</value></data>
+<data name="AutoCityNote" xml:space="preserve"><value>The city is selected automatically from your account information, so you do not need to enter it inside the request.</value></data>
+<data name="MyRequestsTracking" xml:space="preserve"><value>Requests Tracking</value></data>
+<data name="MyRequestsHeroText" xml:space="preserve"><value>Track all requests you have submitted, each request status, and service details in one place.</value></data>
+<data name="MyRequestsCreateNew" xml:space="preserve"><value>Create New Request</value></data>
+<data name="MyRequestsTotal" xml:space="preserve"><value>Total Requests</value></data>
+<data name="MyRequestsPending" xml:space="preserve"><value>Available for Offers</value></data>
+<data name="MyRequestsAccepted" xml:space="preserve"><value>Accepted Requests</value></data>
+<data name="MyRequestsCompleted" xml:space="preserve"><value>Completed Requests</value></data>
+<data name="MyRequestsCanceled" xml:space="preserve"><value>Canceled Requests</value></data>
+<data name="MyRequestsListTitle" xml:space="preserve"><value>Requests List</value></data>
+<data name="MyRequestsListText" xml:space="preserve"><value>This page shows requests ordered from newest to oldest.</value></data>
+<data name="BackToUserDashboard" xml:space="preserve"><value>Back to User Dashboard</value></data>
+<data name="NoRequestsYet" xml:space="preserve"><value>No Requests Yet</value></data>
+<data name="NoRequestsYetText" xml:space="preserve"><value>Start by creating a new request so it can appear to suitable providers based on city and service type.</value></data>
+<data name="MyRequestsStatusPending" xml:space="preserve"><value>Available for Offers</value></data>
+<data name="MyRequestsStatusAccepted" xml:space="preserve"><value>Accepted</value></data>
+<data name="MyRequestsStatusCompleted" xml:space="preserve"><value>Completed</value></data>
+<data name="MyRequestsStatusCanceled" xml:space="preserve"><value>Canceled</value></data>
+<data name="MyRequestsStatusUnknown" xml:space="preserve"><value>Unknown</value></data>
+<data name="MyRequestsImageAlt" xml:space="preserve"><value>Request Image</value></data>
+<data name="MyRequestsServiceLabel" xml:space="preserve"><value>Service:</value></data>
+<data name="MyRequestsAppointmentLabel" xml:space="preserve"><value>Appointment:</value></data>
+<data name="MyRequestsCityLabel" xml:space="preserve"><value>City:</value></data>
+<data name="MyRequestsSentDateLabel" xml:space="preserve"><value>Sent Date:</value></data>
+<data name="MyRequestsViewDetails" xml:space="preserve"><value>View Details</value></data>
+<data name="MyRequestsNotSpecified" xml:space="preserve"><value>Not specified</value></data>
+<data name="MyRequestsNotSpecifiedFemale" xml:space="preserve"><value>Not specified</value></data>
+
+<data name="DetailsPageTitle" xml:space="preserve"><value>Request Details</value></data>
+<data name="DetailsBadge" xml:space="preserve"><value>Request Details</value></data>
+<data name="DetailsHeroText" xml:space="preserve"><value>A full review of the request information, required service, location, and current status.</value></data>
+<data name="DetailsImageHelpText" xml:space="preserve"><value>The request image helps the provider understand the problem faster.</value></data>
+<data name="DetailsDescriptionTitle" xml:space="preserve"><value>Request Description</value></data>
+<data name="DetailsInfoTitle" xml:space="preserve"><value>Request Information</value></data>
+<data name="DetailsServiceType" xml:space="preserve"><value>Service Type</value></data>
+<data name="DetailsCity" xml:space="preserve"><value>City</value></data>
+<data name="DetailsEventDate" xml:space="preserve"><value>Event Date</value></data>
+<data name="DetailsCreatedAt" xml:space="preserve"><value>Request Sent Date</value></data>
+<data name="DetailsAddress" xml:space="preserve"><value>Address / Neighborhood</value></data>
+<data name="DetailsApprovedProvider" xml:space="preserve"><value>Approved Provider</value></data>
+<data name="DetailsNoPhone" xml:space="preserve"><value>No phone number registered</value></data>
+<data name="DetailsContactNow" xml:space="preserve"><value>Contact now</value></data>
+<data name="DetailsOffersTitle" xml:space="preserve"><value>Submitted Offers</value></data>
+<data name="DetailsNoOffers" xml:space="preserve"><value>No offers yet — your request will appear to specialized providers in your city</value></data>
+<data name="DetailsDefaultProvider" xml:space="preserve"><value>Provider</value></data>
+<data name="DetailsRiyal" xml:space="preserve"><value>SAR</value></data>
+<data name="DetailsAccept" xml:space="preserve"><value>Accept</value></data>
+<data name="DetailsConfirmAccept" xml:space="preserve"><value>Approve this provider and accept the offer?</value></data>
+<data name="DetailsBackToMyRequests" xml:space="preserve"><value>Back to My Requests</value></data>
+<data name="DetailsCancelRequest" xml:space="preserve"><value>Cancel Request</value></data>
+<data name="DetailsConfirmCancel" xml:space="preserve"><value>Are you sure you want to cancel this request?</value></data>
+<data name="DetailsNewRequest" xml:space="preserve"><value>New Request</value></data>
+
+<data name="ProfileDashboardTitle" xml:space="preserve"><value>User Dashboard</value></data>
+<data name="ProfileAccountTypeProvider" xml:space="preserve"><value>Service Provider</value></data>
+<data name="ProfileAccountTypeClient" xml:space="preserve"><value>Client</value></data>
+<data name="ProfilePhoneNotAdded" xml:space="preserve"><value>Not added</value></data>
+<data name="ProfileRegionNotSpecified" xml:space="preserve"><value>Not specified</value></data>
+<data name="ProfileSpecialtyNotSpecified" xml:space="preserve"><value>Not specified</value></data>
+<data name="ProfileEdit" xml:space="preserve"><value>Edit Profile</value></data>
+<data name="ProfileNewRequest" xml:space="preserve"><value>New Request</value></data>
+<data name="ProfileBadge" xml:space="preserve"><value>User Dashboard</value></data>
+<data name="ProfileWelcome" xml:space="preserve"><value>Welcome,</value></data>
+<data name="ProfileHeroText" xml:space="preserve"><value>From here, you can manage your account, create a new request, and track your requests.</value></data>
+<data name="ProfileCreateNewRequest" xml:space="preserve"><value>Create New Request</value></data>
+<data name="ProfileTotalRequests" xml:space="preserve"><value>Total Requests</value></data>
+<data name="ProfileAvailableOffers" xml:space="preserve"><value>Available for Offers</value></data>
+<data name="ProfileAccepted" xml:space="preserve"><value>Accepted</value></data>
+<data name="ProfileCanceled" xml:space="preserve"><value>Canceled</value></data>
+<data name="ProfileAccountInfo" xml:space="preserve"><value>Account Information</value></data>
+<data name="ProfileFullName" xml:space="preserve"><value>Full Name</value></data>
+<data name="ProfileEmail" xml:space="preserve"><value>Email</value></data>
+<data name="ProfilePhone" xml:space="preserve"><value>Phone Number</value></data>
+<data name="ProfileCity" xml:space="preserve"><value>City</value></data>
+<data name="ProfileQuickActions" xml:space="preserve"><value>Quick Actions</value></data>
+<data name="ProfileEditAccountData" xml:space="preserve"><value>Edit Account Information</value></data>
+<data name="ProfileViewMyRequests" xml:space="preserve"><value>View My Requests</value></data>
+<data name="ProfileBackHome" xml:space="preserve"><value>Back to Home</value></data>
+<data name="ProfileLatestActivity" xml:space="preserve"><value>Latest Activity</value></data>
+<data name="ProfileLatestActivityText" xml:space="preserve"><value>The latest request or activity related to your account.</value></data>
+<data name="ProfileViewAll" xml:space="preserve"><value>View All</value></data>
+<data name="ProfileViewDetails" xml:space="preserve"><value>View Details</value></data>
+<data name="ProfileNoRequestsTitle" xml:space="preserve"><value>No Requests Yet</value></data>
+<data name="ProfileNoRequestsText" xml:space="preserve"><value>Create your first request and it will appear here.</value></data>
+<data name="ProfileCreateRequest" xml:space="preserve"><value>Create Request</value></data>
+<data name="ProfileProviderAccountTitle" xml:space="preserve"><value>Service Provider Account</value></data>
+<data name="ProfileProviderAccountText" xml:space="preserve"><value>You can edit your specialty and availability status from the edit profile page.</value></data>
+<data name="ProfileStatusPending" xml:space="preserve"><value>Available for Offers</value></data>
+<data name="ProfileStatusAccepted" xml:space="preserve"><value>Accepted</value></data>
+<data name="ProfileStatusCompleted" xml:space="preserve"><value>Completed</value></data>
+<data name="ProfileStatusCanceled" xml:space="preserve"><value>Canceled</value></data>
+<data name="ProfileStatusUnknown" xml:space="preserve"><value>Unknown</value></data>
+
+<data name="EditProfilePageTitle" xml:space="preserve"><value>Edit Profile</value></data>
+<data name="EditProfileSubtitle" xml:space="preserve"><value>Update your basic account information</value></data>
+<data name="ProviderServiceData" xml:space="preserve"><value>Service Provider Information</value></data>
+<data name="AvailableNow" xml:space="preserve"><value>Available now to receive requests</value></data>
+<data name="SaveChanges" xml:space="preserve"><value>Save Changes</value></data>
+<data name="BackToProfile" xml:space="preserve"><value>Back to Profile</value></data>
+</root>
