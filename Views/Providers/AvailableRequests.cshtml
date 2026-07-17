@@ -1,7 +1,9 @@
 @model List<EventRescue.Models.EventRequest>
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<EventRescue.SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "الطلبات المتاحة";
+    ViewData["Title"] = Localizer["AvailableRequests"];
     var currentProviderId = ViewBag.CurrentProviderId as string;
 
     // إحصائيات سريعة للهيرو
@@ -11,18 +13,18 @@
 
 <div class="container er-page mt-4 mb-5">
 
-    @* ================== الهيرو: نفس هوية الصفحة الرئيسية ================== *@
+    @* ================== الهيرو ================== *@
     <section class="er-hero mb-4">
         <div class="er-hero-content">
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <div class="er-badge">
                         <i class="bi bi-broadcast"></i>
-                        رادار المزود
+                        @Localizer["RadarBadge"]
                     </div>
-                    <h1 class="er-title">الطلبات المتاحة في مدينتك</h1>
+                    <h1 class="er-title">@Localizer["RadarTitle"]</h1>
                     <p class="er-subtitle mb-0">
-                        طلبات تخصصك فقط، مرتبة بالأقرب موعداً — قدم عرضك وكن أول من يفزع.
+                        @Localizer["RadarHeroText"]
                     </p>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
@@ -30,19 +32,19 @@
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-primary">@Model.Count</div>
-                                <div class="er-muted small">متاح</div>
+                                <div class="er-muted small">@Localizer["RadarStatAvailable"]</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-info">@myOffersCount</div>
-                                <div class="er-muted small">عروضي</div>
+                                <div class="er-muted small">@Localizer["RadarStatMyOffers"]</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-danger">@emergencyCount</div>
-                                <div class="er-muted small">عاجل</div>
+                                <div class="er-muted small">@Localizer["RadarStatUrgent"]</div>
                             </div>
                         </div>
                     </div>
@@ -74,8 +76,8 @@
             <span class="er-soft-icon mb-3" style="width: 70px; height: 70px; font-size: 2rem;">
                 <i class="bi bi-inbox"></i>
             </span>
-            <h5 class="fw-bold">لا توجد طلبات متاحة حالياً</h5>
-            <p class="er-muted mb-0">سيظهر هنا أي طلب جديد في مدينتك يطابق تخصصك</p>
+            <h5 class="fw-bold">@Localizer["RadarNoRequestsTitle"]</h5>
+            <p class="er-muted mb-0">@Localizer["RadarNoRequestsText"]</p>
         </div>
     }
 
@@ -93,7 +95,7 @@
 
                     @if (!string.IsNullOrEmpty(request.ImagePath))
                     {
-                        <img src="@request.ImagePath" alt="صورة الطلب"
+                        <img src="@request.ImagePath" alt="@Localizer["MyRequestsImageAlt"]"
                              style="width: 100%; height: 190px; object-fit: cover;" />
                     }
 
@@ -109,13 +111,13 @@
                             @if (isEmergency)
                             {
                                 <span class="er-status er-status-canceled">
-                                    <i class="bi bi-alarm-fill"></i> فزعة عاجلة
+                                    <i class="bi bi-alarm-fill"></i> @Localizer["RadarEmergencyBadge"]
                                 </span>
                             }
                             else
                             {
                                 <span class="er-status er-status-pending">
-                                    <i class="bi bi-hourglass-split"></i> متاح للعروض
+                                    <i class="bi bi-hourglass-split"></i> @Localizer["RadarStatusOpen"]
                                 </span>
                             }
                         </div>
@@ -126,15 +128,25 @@
                         <div class="d-flex flex-wrap gap-3 small er-muted mb-3">
                             <span><i class="bi bi-geo-alt-fill text-primary"></i> @request.Region?.Name — @request.Address</span>
                             <span><i class="bi bi-calendar-event text-primary"></i> @request.EventDate.ToString("yyyy/MM/dd — hh:mm tt")</span>
-                            <span><i class="bi bi-people-fill text-primary"></i> @request.ProviderOffers.Count عروض</span>
+                            <span><i class="bi bi-people-fill text-primary"></i> @request.ProviderOffers.Count @Localizer["RadarOffersCount"]</span>
                         </div>
 
                         @if (myOffer != null)
                         {
-                            <div class="alert alert-info rounded-4 py-2 mb-0">
+                            @* عرضي المقدم + زر سحب العرض (عملية Delete) *@
+                            <div class="alert alert-info rounded-4 py-2 mb-2">
                                 <i class="bi bi-hourglass-split"></i>
-                                قدمت عرضاً بسعر <strong>@myOffer.Price ريال</strong> — بانتظار رد العميل
+                                @Localizer["RadarYouOffered"] <strong>@myOffer.Price @Localizer["DetailsRiyal"]</strong>
+                                — @Localizer["RadarWaitingClient"]
                             </div>
+                            <form asp-controller="Providers" asp-action="WithdrawOffer" method="post"
+                                  onsubmit="return confirm('@Localizer["RadarConfirmWithdraw"]');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="offerId" value="@myOffer.Id" />
+                                <button type="submit" class="btn btn-outline-danger er-btn w-100">
+                                    <i class="bi bi-trash3"></i> @Localizer["RadarWithdrawOffer"]
+                                </button>
+                            </form>
                         }
                         else
                         {
@@ -142,11 +154,11 @@
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="eventRequestId" value="@request.Id" />
                                 <div class="input-group">
-                                    <span class="input-group-text">ريال</span>
+                                    <span class="input-group-text">@Localizer["DetailsRiyal"]</span>
                                     <input type="number" name="price" class="form-control"
-                                           placeholder="أدخل سعر عرضك" min="1" max="100000" step="0.5" required />
+                                           placeholder="@Localizer["RadarPricePlaceholder"]" min="1" max="100000" step="0.5" required />
                                     <button type="submit" class="btn btn-primary er-btn">
-                                        <i class="bi bi-send-fill"></i> قدم عرض فزعة
+                                        <i class="bi bi-send-fill"></i> @Localizer["RadarSendOffer"]
                                     </button>
                                 </div>
                             </form>

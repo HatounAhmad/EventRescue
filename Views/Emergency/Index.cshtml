@@ -1,7 +1,9 @@
 @model List<EventRescue.Models.EventRequest>
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<EventRescue.SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "رادار الطوارئ";
+    ViewData["Title"] = Localizer["TodayEmergency"];
     var currentProviderId = ViewBag.CurrentProviderId as string;
     bool isAvailableNow = ViewBag.IsAvailableNow;
 }
@@ -15,11 +17,11 @@
                 <div class="col-lg-8">
                     <div class="er-badge" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.30); color: #fca5a5;">
                         <i class="bi bi-alarm-fill"></i>
-                        رادار الطوارئ الحي
+                        @Localizer["EmergencyBadge"]
                     </div>
-                    <h1 class="er-title">فزعات اليوم في مدينتك</h1>
+                    <h1 class="er-title">@Localizer["EmergencyTitle"]</h1>
                     <p class="er-subtitle mb-0">
-                        كل الطلبات — بجميع التخصصات — التي موعدها خلال أقل من 24 ساعة، الأعجل أولاً.
+                        @Localizer["EmergencyHeroText"]
                     </p>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0 text-lg-start text-center">
@@ -30,14 +32,14 @@
                         {
                             <button type="submit" class="btn btn-success er-btn w-100">
                                 <i class="bi bi-lightning-charge-fill"></i>
-                                متاح الآن للفزعة — اضغط للإيقاف
+                                @Localizer["EmergencyAvailableBtn"]
                             </button>
                         }
                         else
                         {
                             <button type="submit" class="btn btn-outline-light er-btn w-100">
                                 <i class="bi bi-moon"></i>
-                                غير متاح — اضغط للتفعيل
+                                @Localizer["EmergencyUnavailableBtn"]
                             </button>
                         }
                     </form>
@@ -68,8 +70,8 @@
             <span class="er-soft-icon mb-3" style="width: 70px; height: 70px; font-size: 2rem; background: #dcfce7; color: #166534;">
                 <i class="bi bi-shield-check"></i>
             </span>
-            <h5 class="fw-bold">لا توجد طوارئ في مدينتك حالياً</h5>
-            <p class="er-muted mb-0">الوضع هادئ — أي فزعة جديدة بتظهر هنا فوراً</p>
+            <h5 class="fw-bold">@Localizer["EmergencyCalmTitle"]</h5>
+            <p class="er-muted mb-0">@Localizer["EmergencyCalmText"]</p>
         </div>
     }
 
@@ -87,7 +89,7 @@
 
                     @if (!string.IsNullOrEmpty(request.ImagePath))
                     {
-                        <img src="@request.ImagePath" alt="صورة الطلب"
+                        <img src="@request.ImagePath" alt="@Localizer["MyRequestsImageAlt"]"
                              style="width: 100%; height: 190px; object-fit: cover;" />
                     }
 
@@ -102,7 +104,7 @@
                             </div>
                             <span class="er-status er-status-canceled">
                                 <i class="bi bi-alarm-fill"></i>
-                                باقي @hoursLeft ساعة تقريباً
+                                @Localizer["EmergencyHoursLeft", hoursLeft]
                             </span>
                         </div>
 
@@ -112,15 +114,25 @@
                         <div class="d-flex flex-wrap gap-3 small er-muted mb-3">
                             <span><i class="bi bi-geo-alt-fill text-danger"></i> @request.Region?.Name — @request.Address</span>
                             <span><i class="bi bi-calendar-event text-danger"></i> @request.EventDate.ToString("yyyy/MM/dd — hh:mm tt")</span>
-                            <span><i class="bi bi-people-fill text-danger"></i> @request.ProviderOffers.Count عروض</span>
+                            <span><i class="bi bi-people-fill text-danger"></i> @request.ProviderOffers.Count @Localizer["RadarOffersCount"]</span>
                         </div>
 
                         @if (myOffer != null)
                         {
-                            <div class="alert alert-info rounded-4 py-2 mb-0">
+                            @* عرضي المقدم + زر سحب العرض (عملية Delete) *@
+                            <div class="alert alert-info rounded-4 py-2 mb-2">
                                 <i class="bi bi-hourglass-split"></i>
-                                قدمت عرضاً بسعر <strong>@myOffer.Price ريال</strong> — بانتظار رد العميل
+                                @Localizer["RadarYouOffered"] <strong>@myOffer.Price @Localizer["DetailsRiyal"]</strong>
+                                — @Localizer["RadarWaitingClient"]
                             </div>
+                            <form asp-controller="Providers" asp-action="WithdrawOffer" method="post"
+                                  onsubmit="return confirm('@Localizer["RadarConfirmWithdraw"]');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="offerId" value="@myOffer.Id" />
+                                <button type="submit" class="btn btn-outline-danger er-btn w-100">
+                                    <i class="bi bi-trash3"></i> @Localizer["RadarWithdrawOffer"]
+                                </button>
+                            </form>
                         }
                         else
                         {
@@ -128,11 +140,11 @@
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="eventRequestId" value="@request.Id" />
                                 <div class="input-group">
-                                    <span class="input-group-text">ريال</span>
+                                    <span class="input-group-text">@Localizer["DetailsRiyal"]</span>
                                     <input type="number" name="price" class="form-control"
-                                           placeholder="سعر عرض الفزعة" min="1" max="100000" step="0.5" required />
+                                           placeholder="@Localizer["EmergencyPricePlaceholder"]" min="1" max="100000" step="0.5" required />
                                     <button type="submit" class="btn btn-danger er-btn">
-                                        <i class="bi bi-lightning-charge-fill"></i> فزعة!
+                                        <i class="bi bi-lightning-charge-fill"></i> @Localizer["EmergencyGoBtn"]
                                     </button>
                                 </div>
                             </form>

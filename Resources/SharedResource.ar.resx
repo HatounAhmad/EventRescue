@@ -266,4 +266,55 @@
 <data name="AvailableNow" xml:space="preserve"><value>متاح الآن لاستقبال الطلبات</value></data>
 <data name="SaveChanges" xml:space="preserve"><value>حفظ التعديلات</value></data>
 <data name="BackToProfile" xml:space="preserve"><value>العودة للملف الشخصي</value></data>
+<!-- ===== مفاتيح موديول مزود الخدمة: الرادار ===== -->
+<data name="RadarBadge" xml:space="preserve"><value>رادار المزود</value></data>
+<data name="RadarTitle" xml:space="preserve"><value>الطلبات المتاحة في مدينتك</value></data>
+<data name="RadarHeroText" xml:space="preserve"><value>طلبات تخصصك فقط، مرتبة بالأقرب موعداً — قدم عرضك وكن أول من يفزع.</value></data>
+<data name="RadarStatAvailable" xml:space="preserve"><value>متاح</value></data>
+<data name="RadarStatMyOffers" xml:space="preserve"><value>عروضي</value></data>
+<data name="RadarStatUrgent" xml:space="preserve"><value>عاجل</value></data>
+<data name="RadarNoRequestsTitle" xml:space="preserve"><value>لا توجد طلبات متاحة حالياً</value></data>
+<data name="RadarNoRequestsText" xml:space="preserve"><value>سيظهر هنا أي طلب جديد في مدينتك يطابق تخصصك</value></data>
+<data name="RadarEmergencyBadge" xml:space="preserve"><value>فزعة عاجلة</value></data>
+<data name="RadarStatusOpen" xml:space="preserve"><value>متاح للعروض</value></data>
+<data name="RadarOffersCount" xml:space="preserve"><value>عروض</value></data>
+<data name="RadarYouOffered" xml:space="preserve"><value>قدمت عرضاً بسعر</value></data>
+<data name="RadarWaitingClient" xml:space="preserve"><value>بانتظار رد العميل</value></data>
+<data name="RadarWithdrawOffer" xml:space="preserve"><value>سحب العرض</value></data>
+<data name="RadarConfirmWithdraw" xml:space="preserve"><value>هل أنت متأكد من سحب عرضك نهائياً؟</value></data>
+<data name="RadarPricePlaceholder" xml:space="preserve"><value>أدخل سعر عرضك</value></data>
+<data name="RadarSendOffer" xml:space="preserve"><value>قدم عرض فزعة</value></data>
+<!-- ===== مفاتيح موديول مزود الخدمة: مهامي ===== -->
+<data name="TasksBadge" xml:space="preserve"><value>لوحة مهامي</value></data>
+<data name="TasksTitle" xml:space="preserve"><value>مهامك ومسيرتك</value></data>
+<data name="TasksHeroText" xml:space="preserve"><value>المهام التي اعتمدك العميل فيها — أنجزها وانقلها لأرشيف أعمالك.</value></data>
+<data name="TasksStatCurrent" xml:space="preserve"><value>جارية</value></data>
+<data name="TasksStatCompleted" xml:space="preserve"><value>مكتملة</value></data>
+<data name="TasksStatEarnings" xml:space="preserve"><value>ريال أرباح</value></data>
+<data name="TasksCurrentTitle" xml:space="preserve"><value>المهام الجارية</value></data>
+<data name="TasksNoCurrentTitle" xml:space="preserve"><value>لا توجد مهام جارية</value></data>
+<data name="TasksNoCurrentText" xml:space="preserve"><value>تابع رادار الطلبات وقدم عروضك:</value></data>
+<data name="TasksStatusOngoing" xml:space="preserve"><value>جارية</value></data>
+<data name="TasksAgreedPrice" xml:space="preserve"><value>المتفق عليه</value></data>
+<data name="TasksCompleteBtn" xml:space="preserve"><value>إنهاء المهمة</value></data>
+<data name="TasksConfirmComplete" xml:space="preserve"><value>هل أتممت المهمة فعلاً؟ سيتم نقلها إلى الأرشيف</value></data>
+<data name="TasksArchiveTitle" xml:space="preserve"><value>أرشيف أعمالي</value></data>
+<data name="TasksNoArchiveText" xml:space="preserve"><value>لا توجد أعمال منتهية بعد — أول مهمة تنهيها ستظهر هنا</value></data>
+<data name="TasksThClient" xml:space="preserve"><value>العميل</value></data>
+<data name="TasksThPrice" xml:space="preserve"><value>السعر</value></data>
+<data name="TasksThStatus" xml:space="preserve"><value>الحالة</value></data>
+<!-- ===== مفاتيح موديول مزود الخدمة: الطوارئ ===== -->
+<data name="EmergencyBadge" xml:space="preserve"><value>رادار الطوارئ الحي</value></data>
+<data name="EmergencyTitle" xml:space="preserve"><value>فزعات اليوم في مدينتك</value></data>
+<data name="EmergencyHeroText" xml:space="preserve"><value>كل الطلبات — بجميع التخصصات — التي موعدها خلال أقل من 24 ساعة، الأعجل أولاً.</value></data>
+<data name="EmergencyAvailableBtn" xml:space="preserve"><value>متاح الآن للفزعة — اضغط للإيقاف</value></data>
+<data name="EmergencyUnavailableBtn" xml:space="preserve"><value>غير متاح — اضغط للتفعيل</value></data>
+<data name="EmergencyCalmTitle" xml:space="preserve"><value>لا توجد طوارئ في مدينتك حالياً</value></data>
+<data name="EmergencyCalmText" xml:space="preserve"><value>الوضع هادئ — أي فزعة جديدة ستظهر هنا فوراً</value></data>
+<data name="EmergencyHoursLeft" xml:space="preserve"><value>باقي {0} ساعة تقريباً</value></data>
+<data name="EmergencyPricePlaceholder" xml:space="preserve"><value>سعر عرض الفزعة</value></data>
+<data name="EmergencyGoBtn" xml:space="preserve"><value>فزعة!</value></data>
+<!-- ===== مفاتيح الحذف في صفحة التفاصيل ===== -->
+<data name="DetailsDeleteRequest" xml:space="preserve"><value>حذف الطلب نهائياً</value></data>
+<data name="DetailsConfirmDelete" xml:space="preserve"><value>سيتم حذف الطلب وكل عروضه نهائياً — هل أنت متأكد؟</value></data>
 </root>

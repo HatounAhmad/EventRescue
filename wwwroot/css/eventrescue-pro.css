@@ -22,6 +22,9 @@ body {
 .er-page {
     direction: rtl;
 }
+html[dir="ltr"] .er-page {
+    direction: ltr;
+}
 .er-hero {
     position: relative;
     overflow: hidden;

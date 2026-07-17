@@ -332,6 +332,22 @@
                             </form>
                         }
 
+                        @* حذف نهائي: للطلبات المتاحة أو الملغية فقط (عملية Delete) *@
+                        @if (Model.Status == EventStatus.Pending || Model.Status == EventStatus.Canceled)
+                        {
+                            <form asp-action="Delete"
+                                  asp-route-id="@Model.Id"
+                                  method="post"
+                                  onsubmit="return confirm('@Localizer["DetailsConfirmDelete"]');">
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit" class="btn btn-danger er-btn">
+                                    <i class="bi bi-trash3"></i>
+                                    @Localizer["DetailsDeleteRequest"]
+                                </button>
+                            </form>
+                        }
+
                         <a asp-action="Create" class="btn btn-primary er-btn">
                             <i class="bi bi-plus-circle"></i>
                             @Localizer["DetailsNewRequest"]

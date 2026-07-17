@@ -227,5 +227,44 @@ namespace EventRescue.Controllers
             TempData["SuccessMessage"] = "تم إنهاء المهمة بنجاح — انتقلت إلى أرشيف أعمالك";
             return RedirectToAction(nameof(MyTasks));
         }
+
+        //==================================================
+        // WithdrawOffer : زر فوري (بدون فيو) — عملية الحذف Delete
+        // الفني يسحب عرضه قبل موافقة العميل فيُحذف نهائياً
+        //==================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WithdrawOffer(int offerId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var providerOffer = await _context.ProviderOffers
+                .Include(o => o.EventRequest)
+                .FirstOrDefaultAsync(o => o.Id == offerId);
+
+            if (providerOffer == null || currentUser == null)
+            {
+                return NotFound();
+            }
+
+            // حماية: فقط صاحب العرض نفسه يقدر يسحبه
+            if (providerOffer.ProviderId != currentUser.Id)
+            {
+                return Forbid();
+            }
+
+            // حماية: ما ينسحب عرض وافق عليه العميل — صار التزاماً
+            if (providerOffer.IsAccepted)
+            {
+                TempData["ErrorMessage"] = "لا يمكن سحب عرض وافق عليه العميل";
+                return RedirectToAction(nameof(AvailableRequests));
+            }
+
+            _context.ProviderOffers.Remove(providerOffer);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "تم سحب عرضك بنجاح";
+            return RedirectToAction(nameof(AvailableRequests));
+        }
     }
 }

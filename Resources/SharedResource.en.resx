@@ -264,4 +264,55 @@
 <data name="AvailableNow" xml:space="preserve"><value>Available now to receive requests</value></data>
 <data name="SaveChanges" xml:space="preserve"><value>Save Changes</value></data>
 <data name="BackToProfile" xml:space="preserve"><value>Back to Profile</value></data>
+<!-- ===== Services Module keys: Radar ===== -->
+<data name="RadarBadge" xml:space="preserve"><value>Provider Radar</value></data>
+<data name="RadarTitle" xml:space="preserve"><value>Available Requests in Your City</value></data>
+<data name="RadarHeroText" xml:space="preserve"><value>Requests matching your specialty only, sorted by nearest date — send your offer and be the first to help.</value></data>
+<data name="RadarStatAvailable" xml:space="preserve"><value>Available</value></data>
+<data name="RadarStatMyOffers" xml:space="preserve"><value>My Offers</value></data>
+<data name="RadarStatUrgent" xml:space="preserve"><value>Urgent</value></data>
+<data name="RadarNoRequestsTitle" xml:space="preserve"><value>No available requests right now</value></data>
+<data name="RadarNoRequestsText" xml:space="preserve"><value>Any new request in your city matching your specialty will appear here</value></data>
+<data name="RadarEmergencyBadge" xml:space="preserve"><value>Urgent Rescue</value></data>
+<data name="RadarStatusOpen" xml:space="preserve"><value>Open for Offers</value></data>
+<data name="RadarOffersCount" xml:space="preserve"><value>offers</value></data>
+<data name="RadarYouOffered" xml:space="preserve"><value>You offered</value></data>
+<data name="RadarWaitingClient" xml:space="preserve"><value>waiting for client response</value></data>
+<data name="RadarWithdrawOffer" xml:space="preserve"><value>Withdraw Offer</value></data>
+<data name="RadarConfirmWithdraw" xml:space="preserve"><value>Are you sure you want to permanently withdraw your offer?</value></data>
+<data name="RadarPricePlaceholder" xml:space="preserve"><value>Enter your offer price</value></data>
+<data name="RadarSendOffer" xml:space="preserve"><value>Send Rescue Offer</value></data>
+<!-- ===== Services Module keys: My Tasks ===== -->
+<data name="TasksBadge" xml:space="preserve"><value>My Tasks Board</value></data>
+<data name="TasksTitle" xml:space="preserve"><value>Your Tasks and Journey</value></data>
+<data name="TasksHeroText" xml:space="preserve"><value>Tasks where the client chose you — complete them and build your work archive.</value></data>
+<data name="TasksStatCurrent" xml:space="preserve"><value>Ongoing</value></data>
+<data name="TasksStatCompleted" xml:space="preserve"><value>Completed</value></data>
+<data name="TasksStatEarnings" xml:space="preserve"><value>SAR Earned</value></data>
+<data name="TasksCurrentTitle" xml:space="preserve"><value>Ongoing Tasks</value></data>
+<data name="TasksNoCurrentTitle" xml:space="preserve"><value>No ongoing tasks</value></data>
+<data name="TasksNoCurrentText" xml:space="preserve"><value>Keep an eye on the requests radar and send your offers:</value></data>
+<data name="TasksStatusOngoing" xml:space="preserve"><value>Ongoing</value></data>
+<data name="TasksAgreedPrice" xml:space="preserve"><value>Agreed price</value></data>
+<data name="TasksCompleteBtn" xml:space="preserve"><value>Complete Task</value></data>
+<data name="TasksConfirmComplete" xml:space="preserve"><value>Have you really finished the task? It will be moved to the archive</value></data>
+<data name="TasksArchiveTitle" xml:space="preserve"><value>My Work Archive</value></data>
+<data name="TasksNoArchiveText" xml:space="preserve"><value>No completed work yet — your first completed task will appear here</value></data>
+<data name="TasksThClient" xml:space="preserve"><value>Client</value></data>
+<data name="TasksThPrice" xml:space="preserve"><value>Price</value></data>
+<data name="TasksThStatus" xml:space="preserve"><value>Status</value></data>
+<!-- ===== Services Module keys: Emergency ===== -->
+<data name="EmergencyBadge" xml:space="preserve"><value>Live Emergency Radar</value></data>
+<data name="EmergencyTitle" xml:space="preserve"><value>Today's Rescues in Your City</value></data>
+<data name="EmergencyHeroText" xml:space="preserve"><value>All requests — across all specialties — happening within the next 24 hours, most urgent first.</value></data>
+<data name="EmergencyAvailableBtn" xml:space="preserve"><value>Available for rescue now — click to stop</value></data>
+<data name="EmergencyUnavailableBtn" xml:space="preserve"><value>Unavailable — click to activate</value></data>
+<data name="EmergencyCalmTitle" xml:space="preserve"><value>No emergencies in your city right now</value></data>
+<data name="EmergencyCalmText" xml:space="preserve"><value>All calm — any new rescue will appear here instantly</value></data>
+<data name="EmergencyHoursLeft" xml:space="preserve"><value>About {0} hours left</value></data>
+<data name="EmergencyPricePlaceholder" xml:space="preserve"><value>Rescue offer price</value></data>
+<data name="EmergencyGoBtn" xml:space="preserve"><value>Rescue!</value></data>
+<!-- ===== Delete keys in Details page ===== -->
+<data name="DetailsDeleteRequest" xml:space="preserve"><value>Delete Request Permanently</value></data>
+<data name="DetailsConfirmDelete" xml:space="preserve"><value>The request and all its offers will be permanently deleted — are you sure?</value></data>
 </root>

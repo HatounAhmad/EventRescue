@@ -203,7 +203,47 @@ public async Task<IActionResult> Cancel(int id)
     return RedirectToAction("MyRequests");
 }
 
-    
+//==================================================
+// Delete : حذف الطلب نهائياً من قاعدة البيانات — عملية Delete
+// متاح لصاحب الطلب فقط، وللطلبات المتاحة أو الملغية
+// (المقبولة والمكتملة تبقى كسجل ولا تحذف)
+//==================================================
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Delete(int id)
+{
+    var user = await _userManager.GetUserAsync(User);
+
+    if (user == null)
+    {
+        return RedirectToAction("Login", "Account");
+    }
+
+    var request = await _context.EventRequests
+        .FirstOrDefaultAsync(r => r.Id == id && r.UserId == user.Id);
+
+    if (request == null)
+    {
+        return NotFound();
+    }
+
+    // حماية: الطلب المقبول التزام بين طرفين، والمكتمل سجل تاريخي — لا يحذفان
+    if (request.Status == EventStatus.Accepted || request.Status == EventStatus.Completed)
+    {
+        TempData["ErrorMessage"] = "لا يمكن حذف طلب مقبول أو مكتمل";
+        return RedirectToAction("Details", new { id = request.Id });
+    }
+
+    // الحذف يشمل تلقائياً كل العروض المرتبطة بالطلب (Cascade)
+    _context.EventRequests.Remove(request);
+    await _context.SaveChangesAsync();
+
+    TempData["SuccessMessage"] = "تم حذف الطلب نهائياً";
+
+    return RedirectToAction("MyRequests");
+}
+
+
         private void LoadCategories()
         {
             ViewBag.Categories = _context.Categories.ToList();

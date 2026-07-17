@@ -1,8 +1,10 @@
 @model List<EventRescue.Models.EventRequest>
 @using EventRescue.Models.Enums
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<EventRescue.SharedResource> Localizer
 
 @{
-    ViewData["Title"] = "مهامي";
+    ViewData["Title"] = Localizer["MyTasks"];
 
     var currentTasks = Model.Where(r => r.Status == EventStatus.Accepted).ToList();
     var archivedTasks = Model.Where(r => r.Status == EventStatus.Completed).ToList();
@@ -22,11 +24,11 @@
                 <div class="col-lg-8">
                     <div class="er-badge">
                         <i class="bi bi-list-check"></i>
-                        لوحة مهامي
+                        @Localizer["TasksBadge"]
                     </div>
-                    <h1 class="er-title">مهامك ومسيرتك</h1>
+                    <h1 class="er-title">@Localizer["TasksTitle"]</h1>
                     <p class="er-subtitle mb-0">
-                        المهام التي اعتمدك العميل فيها — أنجزها وانقلها لأرشيف أعمالك.
+                        @Localizer["TasksHeroText"]
                     </p>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
@@ -34,19 +36,19 @@
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-info">@currentTasks.Count</div>
-                                <div class="er-muted small">جارية</div>
+                                <div class="er-muted small">@Localizer["TasksStatCurrent"]</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-success">@archivedTasks.Count</div>
-                                <div class="er-muted small">مكتملة</div>
+                                <div class="er-muted small">@Localizer["TasksStatCompleted"]</div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="er-stat py-3">
                                 <div class="er-stat-number text-primary">@totalEarnings</div>
-                                <div class="er-muted small">ريال أرباح</div>
+                                <div class="er-muted small">@Localizer["TasksStatEarnings"]</div>
                             </div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
     @* ================== المهام الجارية ================== *@
     <h5 class="fw-bold mb-3">
         <i class="bi bi-lightning-charge-fill text-warning"></i>
-        المهام الجارية
+        @Localizer["TasksCurrentTitle"]
     </h5>
 
     @if (!currentTasks.Any())
@@ -82,9 +84,10 @@
             <span class="er-soft-icon mb-3" style="width: 70px; height: 70px; font-size: 2rem;">
                 <i class="bi bi-cup-hot"></i>
             </span>
-            <h6 class="fw-bold">لا توجد مهام جارية</h6>
+            <h6 class="fw-bold">@Localizer["TasksNoCurrentTitle"]</h6>
             <p class="er-muted mb-0">
-                تابع <a asp-controller="Providers" asp-action="AvailableRequests">رادار الطلبات</a> وقدم عروضك
+                @Localizer["TasksNoCurrentText"]
+                <a asp-controller="Providers" asp-action="AvailableRequests">@Localizer["AvailableRequests"]</a>
             </p>
         </div>
     }
@@ -105,7 +108,7 @@
                             <strong>@task.Category?.Name</strong>
                         </div>
                         <span class="er-status er-status-accepted">
-                            <i class="bi bi-check2-circle"></i> جارية
+                            <i class="bi bi-check2-circle"></i> @Localizer["TasksStatusOngoing"]
                         </span>
                     </div>
 
@@ -117,7 +120,7 @@
                         <span><i class="bi bi-calendar-event text-primary"></i> @task.EventDate.ToString("yyyy/MM/dd — hh:mm tt")</span>
                         @if (acceptedOffer != null)
                         {
-                            <span><i class="bi bi-cash-stack text-success"></i> المتفق عليه: <strong>@acceptedOffer.Price ريال</strong></span>
+                            <span><i class="bi bi-cash-stack text-success"></i> @Localizer["TasksAgreedPrice"]: <strong>@acceptedOffer.Price @Localizer["DetailsRiyal"]</strong></span>
                         }
                     </div>
 
@@ -128,7 +131,7 @@
                             <div>
                                 <div class="fw-bold">@task.User?.FullName</div>
                                 <a href="tel:@task.User?.PhoneNumber" class="small" dir="ltr">
-                                    <i class="bi bi-telephone-fill"></i> @(task.User?.PhoneNumber ?? "لم يسجل رقم")
+                                    <i class="bi bi-telephone-fill"></i> @(task.User?.PhoneNumber ?? Localizer["DetailsNoPhone"].Value)
                                 </a>
                             </div>
                         </div>
@@ -136,11 +139,11 @@
                     </div>
 
                     <form asp-controller="Providers" asp-action="CompleteRequest" method="post"
-                          onsubmit="return confirm('هل أتممت المهمة فعلاً؟ سيتم نقلها إلى الأرشيف');">
+                          onsubmit="return confirm('@Localizer["TasksConfirmComplete"]');">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="eventRequestId" value="@task.Id" />
                         <button type="submit" class="btn btn-success er-btn w-100">
-                            <i class="bi bi-check2-all"></i> إنهاء المهمة
+                            <i class="bi bi-check2-all"></i> @Localizer["TasksCompleteBtn"]
                         </button>
                     </form>
 
@@ -152,7 +155,7 @@
     @* ================== أرشيف الأعمال ================== *@
     <h5 class="fw-bold mb-3">
         <i class="bi bi-archive-fill text-secondary"></i>
-        أرشيف أعمالي
+        @Localizer["TasksArchiveTitle"]
     </h5>
 
     @if (!archivedTasks.Any())
@@ -161,7 +164,7 @@
             <span class="er-soft-icon mb-3" style="width: 70px; height: 70px; font-size: 2rem;">
                 <i class="bi bi-archive"></i>
             </span>
-            <p class="er-muted mb-0">لا توجد أعمال منتهية بعد — أول مهمة تنهيها بتظهر هنا</p>
+            <p class="er-muted mb-0">@Localizer["TasksNoArchiveText"]</p>
         </div>
     }
     else
@@ -171,13 +174,13 @@
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>القسم</th>
-                            <th>العنوان</th>
-                            <th>العميل</th>
-                            <th>المدينة</th>
-                            <th>السعر</th>
-                            <th>تاريخ المناسبة</th>
-                            <th>الحالة</th>
+                            <th>@Localizer["Category"]</th>
+                            <th>@Localizer["RequestTitle"]</th>
+                            <th>@Localizer["TasksThClient"]</th>
+                            <th>@Localizer["Region"]</th>
+                            <th>@Localizer["TasksThPrice"]</th>
+                            <th>@Localizer["EventDate"]</th>
+                            <th>@Localizer["TasksThStatus"]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,11 +192,11 @@
                                 <td class="fw-bold">@task.Title</td>
                                 <td>@task.User?.FullName</td>
                                 <td>@task.Region?.Name</td>
-                                <td>@(offer?.Price.ToString("0.##") ?? "-") ريال</td>
+                                <td>@(offer?.Price.ToString("0.##") ?? "-") @Localizer["DetailsRiyal"]</td>
                                 <td>@task.EventDate.ToString("yyyy/MM/dd")</td>
                                 <td>
                                     <span class="er-status er-status-completed">
-                                        <i class="bi bi-patch-check"></i> مكتمل
+                                        <i class="bi bi-patch-check"></i> @Localizer["MyRequestsStatusCompleted"]
                                     </span>
                                 </td>
                             </tr>
