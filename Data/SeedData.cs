@@ -11,6 +11,10 @@ namespace EventRescue.Data
         {
             using var context = serviceProvider.GetRequiredService<AppDbContext>();
 
+            // تطبيق الترحيلات تلقائياً: ينشئ قاعدة البيانات وجداولها إن لم تكن موجودة
+            // (يسهل التشغيل لأول مرة على أي جهاز أو استضافة)
+            await context.Database.MigrateAsync();
+
             var userManager =
                 serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
